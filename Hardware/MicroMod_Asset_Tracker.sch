@@ -35545,21 +35545,21 @@ with the 3.3V regulator.</text>
 <net name="VSIM" class="0">
 <segment>
 <pinref part="J17" gate="G$1" pin="VCC"/>
-<wire x1="309.88" y1="147.32" x2="279.4" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="147.32" x2="271.78" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="147.32" x2="281.94" y2="147.32" width="0.1524" layer="91"/>
 <label x="259.08" y="147.32" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="D8" gate="G$1" pin="1"/>
+<wire x1="281.94" y1="147.32" x2="271.78" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="147.32" x2="261.62" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="147.32" x2="259.08" y2="147.32" width="0.1524" layer="91"/>
-<wire x1="284.48" y1="132.08" x2="279.4" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="279.4" y1="132.08" x2="279.4" y2="147.32" width="0.1524" layer="91"/>
-<junction x="279.4" y="147.32"/>
 <pinref part="C12" gate="G$1" pin="2"/>
 <wire x1="261.62" y1="149.86" x2="261.62" y2="147.32" width="0.1524" layer="91"/>
 <junction x="261.62" y="147.32"/>
 <pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="271.78" y1="149.86" x2="271.78" y2="147.32" width="0.1524" layer="91"/>
 <junction x="271.78" y="147.32"/>
+<pinref part="D8" gate="G$1" pin="3"/>
+<wire x1="284.48" y1="127" x2="281.94" y2="127" width="0.1524" layer="91"/>
+<wire x1="281.94" y1="127" x2="281.94" y2="147.32" width="0.1524" layer="91"/>
+<junction x="281.94" y="147.32"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$2" pin="VSIM"/>
@@ -35570,17 +35570,17 @@ with the 3.3V regulator.</text>
 <net name="SIM_IO" class="0">
 <segment>
 <pinref part="J17" gate="G$1" pin="IO"/>
-<wire x1="309.88" y1="144.78" x2="299.72" y2="144.78" width="0.1524" layer="91"/>
-<wire x1="299.72" y1="144.78" x2="284.48" y2="144.78" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="144.78" x2="302.26" y2="144.78" width="0.1524" layer="91"/>
 <label x="259.08" y="144.78" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="D8" gate="G$1" pin="4"/>
+<wire x1="302.26" y1="144.78" x2="284.48" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="284.48" y1="144.78" x2="259.08" y2="144.78" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="127" x2="299.72" y2="127" width="0.1524" layer="91"/>
-<wire x1="299.72" y1="127" x2="299.72" y2="144.78" width="0.1524" layer="91"/>
-<junction x="299.72" y="144.78"/>
 <pinref part="C10" gate="G$1" pin="2"/>
 <wire x1="284.48" y1="149.86" x2="284.48" y2="144.78" width="0.1524" layer="91"/>
 <junction x="284.48" y="144.78"/>
+<pinref part="D8" gate="G$1" pin="6"/>
+<wire x1="297.18" y1="132.08" x2="302.26" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="302.26" y1="132.08" x2="302.26" y2="144.78" width="0.1524" layer="91"/>
+<junction x="302.26" y="144.78"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$2" pin="SIM_IO"/>
@@ -35591,17 +35591,17 @@ with the 3.3V regulator.</text>
 <net name="SIM_CLK" class="0">
 <segment>
 <pinref part="J17" gate="G$1" pin="CLK"/>
-<wire x1="309.88" y1="142.24" x2="302.26" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="142.24" x2="271.78" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="142.24" x2="279.4" y2="142.24" width="0.1524" layer="91"/>
 <label x="259.08" y="142.24" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="D8" gate="G$1" pin="6"/>
+<wire x1="279.4" y1="142.24" x2="271.78" y2="142.24" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="142.24" x2="259.08" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="297.18" y1="132.08" x2="302.26" y2="132.08" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="132.08" x2="302.26" y2="142.24" width="0.1524" layer="91"/>
-<junction x="302.26" y="142.24"/>
 <pinref part="C8" gate="G$1" pin="1"/>
 <wire x1="271.78" y1="134.62" x2="271.78" y2="142.24" width="0.1524" layer="91"/>
 <junction x="271.78" y="142.24"/>
+<pinref part="D8" gate="G$1" pin="1"/>
+<wire x1="284.48" y1="132.08" x2="279.4" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="279.4" y1="132.08" x2="279.4" y2="142.24" width="0.1524" layer="91"/>
+<junction x="279.4" y="142.24"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$2" pin="SIM_CLK"/>
@@ -35612,17 +35612,17 @@ with the 3.3V regulator.</text>
 <net name="SIM_RST" class="0">
 <segment>
 <pinref part="J17" gate="G$1" pin="RST"/>
-<wire x1="309.88" y1="139.7" x2="281.94" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="139.7" x2="261.62" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="309.88" y1="139.7" x2="299.72" y2="139.7" width="0.1524" layer="91"/>
 <label x="259.08" y="139.7" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="D8" gate="G$1" pin="3"/>
+<wire x1="299.72" y1="139.7" x2="261.62" y2="139.7" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="139.7" x2="259.08" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="284.48" y1="127" x2="281.94" y2="127" width="0.1524" layer="91"/>
-<wire x1="281.94" y1="127" x2="281.94" y2="139.7" width="0.1524" layer="91"/>
-<junction x="281.94" y="139.7"/>
 <pinref part="C7" gate="G$1" pin="1"/>
 <wire x1="261.62" y1="134.62" x2="261.62" y2="139.7" width="0.1524" layer="91"/>
 <junction x="261.62" y="139.7"/>
+<pinref part="D8" gate="G$1" pin="4"/>
+<wire x1="297.18" y1="127" x2="299.72" y2="127" width="0.1524" layer="91"/>
+<wire x1="299.72" y1="127" x2="299.72" y2="139.7" width="0.1524" layer="91"/>
+<junction x="299.72" y="139.7"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$2" pin="SIM_RST"/>
@@ -35695,7 +35695,7 @@ with the 3.3V regulator.</text>
 <label x="33.02" y="142.24" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="N$23" class="0">
+<net name="VREG_3.3V" class="0">
 <segment>
 <pinref part="C4" gate="G$1" pin="1"/>
 <wire x1="121.92" y1="259.08" x2="132.08" y2="259.08" width="0.1524" layer="91"/>
@@ -35712,6 +35712,7 @@ with the 3.3V regulator.</text>
 <pinref part="MEAS" gate="JP1" pin="1"/>
 <wire x1="144.78" y1="259.08" x2="142.24" y2="259.08" width="0.1524" layer="91"/>
 <junction x="142.24" y="259.08"/>
+<label x="127" y="259.08" size="1.27" layer="95"/>
 </segment>
 </net>
 <net name="SARA_INT_1.8V" class="0">
