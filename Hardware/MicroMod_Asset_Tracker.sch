@@ -22109,26 +22109,6 @@ part number 2062-2P from STA</description>
 <text x="0" y="5.715" size="0.6096" layer="25" font="vector" ratio="20" align="center">&gt;Name</text>
 <text x="0" y="-5.08" size="0.6096" layer="27" font="vector" ratio="20" align="center">&gt;Value</text>
 </package>
-<package name="1X02_6.35_SCREWTERM">
-<description>&lt;h3&gt;2 Pin Screw Terminal - 6.35 mm&lt;/h3&gt;
-300VAC-30A Screw Terminal
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count:2&lt;/li&gt;
-&lt;li&gt;Pin pitch: 6.35 mm&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<pad name="P1" x="-3.175" y="0" drill="1.6" diameter="2.8"/>
-<pad name="P2" x="3.175" y="0" drill="1.6" diameter="2.8"/>
-<wire x1="-6.65" y1="5.362" x2="6.65" y2="5.362" width="0.2032" layer="21"/>
-<wire x1="6.65" y1="5.362" x2="6.65" y2="4.762" width="0.2032" layer="21"/>
-<wire x1="6.65" y1="4.762" x2="6.65" y2="-7.9" width="0.2032" layer="21"/>
-<wire x1="6.65" y1="-7.9" x2="-6.65" y2="-7.9" width="0.2032" layer="21"/>
-<wire x1="-6.65" y1="-7.9" x2="-6.65" y2="4.762" width="0.2032" layer="21"/>
-<wire x1="-6.65" y1="4.762" x2="-6.65" y2="5.362" width="0.2032" layer="21"/>
-<wire x1="-6.65" y1="4.762" x2="6.65" y2="4.762" width="0.2032" layer="21"/>
-</package>
 <package name="MOLEX-1X4">
 <description>&lt;h3&gt;Molex 4-Pin Plated Through-Hole&lt;/h3&gt;
 &lt;p&gt;Specifications:
@@ -22764,6 +22744,78 @@ Used as a test point connection for pogo pins or other debugging tools.
 &lt;/ul&gt;&lt;/p&gt;</description>
 <pad name="P$1" x="0" y="0" drill="0.381" diameter="0.6096" stop="no"/>
 <circle x="0" y="0" radius="0.381" width="0" layer="30"/>
+</package>
+<package name="JST-4-SMD">
+<description>&lt;h3&gt;JST 4 Pin Right Angle SMT&lt;/h3&gt;
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count: 4&lt;/li&gt;
+&lt;li&gt;Pin pitch: 2mm&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Example device(s):
+&lt;ul&gt;&lt;li&gt;CONN_04&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<wire x1="-5.99" y1="-2.07" x2="-5.99" y2="-5.57" width="0.2032" layer="21"/>
+<wire x1="-5.99" y1="-5.57" x2="-5.19" y2="-5.57" width="0.2032" layer="21"/>
+<wire x1="-5.19" y1="-5.57" x2="-5.19" y2="-3.07" width="0.2032" layer="21"/>
+<wire x1="-5.19" y1="-3.07" x2="-3.99" y2="-3.07" width="0.2032" layer="21"/>
+<wire x1="4.01" y1="-3.07" x2="5.21" y2="-3.07" width="0.2032" layer="21"/>
+<wire x1="5.21" y1="-3.07" x2="5.21" y2="-5.57" width="0.2032" layer="21"/>
+<wire x1="5.21" y1="-5.57" x2="6.01" y2="-5.57" width="0.2032" layer="21"/>
+<wire x1="6.01" y1="-5.57" x2="6.01" y2="-2.07" width="0.2032" layer="21"/>
+<wire x1="4.01" y1="1.93" x2="-3.99" y2="1.93" width="0.2032" layer="21"/>
+<smd name="4" x="-2.99" y="-4.77" dx="1" dy="4.6" layer="1"/>
+<smd name="1" x="3.01" y="-4.77" dx="1" dy="4.6" layer="1"/>
+<smd name="NC1" x="-5.39" y="0.43" dx="3.4" dy="1.6" layer="1" rot="R90"/>
+<smd name="NC2" x="5.41" y="0.43" dx="3.4" dy="1.6" layer="1" rot="R90"/>
+<smd name="2" x="1.01" y="-4.77" dx="1" dy="4.6" layer="1"/>
+<text x="-1.397" y="0.635" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
+<text x="-1.651" y="-1.27" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
+<smd name="3" x="-0.99" y="-4.77" dx="1" dy="4.6" layer="1"/>
+</package>
+<package name="JST-4-SMD-1.25MM-LOCKING">
+<wire x1="-3" y1="-0.93" x2="3" y2="-0.93" width="0.2032" layer="21"/>
+<smd name="1" x="-1.875" y="3.3" dx="0.6" dy="1.7" layer="1" rot="R180"/>
+<smd name="NC1" x="3.725" y="0.1" dx="2.7" dy="1" layer="1" rot="R270"/>
+<smd name="NC2" x="-3.725" y="0.1" dx="2.7" dy="1" layer="1" rot="R270"/>
+<wire x1="-4.125" y1="3.05" x2="4.125" y2="3.05" width="0.01" layer="51"/>
+<wire x1="4.125" y1="3.05" x2="4.125" y2="-1" width="0.01" layer="51"/>
+<wire x1="4.125" y1="-1" x2="-4.125" y2="-1" width="0.01" layer="51"/>
+<wire x1="-4.125" y1="-1" x2="-4.125" y2="3.05" width="0.01" layer="51"/>
+<text x="0" y="1" size="0.5" layer="25" align="center">&gt;Name</text>
+<text x="0" y="0" size="0.5" layer="27" align="center">&gt;Value</text>
+<smd name="2" x="-0.625" y="3.3" dx="0.6" dy="1.7" layer="1" rot="R180"/>
+<smd name="3" x="0.625" y="3.3" dx="0.6" dy="1.7" layer="1" rot="R180"/>
+<smd name="4" x="1.875" y="3.3" dx="0.6" dy="1.7" layer="1" rot="R180"/>
+<rectangle x1="-1.975" y1="3.05" x2="-1.775" y2="3.85" layer="51"/>
+<rectangle x1="-0.725" y1="3.05" x2="-0.525" y2="3.85" layer="51"/>
+<rectangle x1="0.525" y1="3.05" x2="0.725" y2="3.85" layer="51"/>
+<rectangle x1="1.775" y1="3.05" x2="1.975" y2="3.85" layer="51"/>
+<rectangle x1="3.625" y1="-1" x2="3.825" y2="1.2" layer="51"/>
+<rectangle x1="-3.825" y1="-1" x2="-3.625" y2="1.2" layer="51"/>
+<wire x1="-4.05" y1="2" x2="-4.05" y2="2.95" width="0.2032" layer="21"/>
+<wire x1="-4.05" y1="2.95" x2="-3" y2="2.95" width="0.2032" layer="21"/>
+<wire x1="3" y1="2.95" x2="4.05" y2="2.95" width="0.2032" layer="21"/>
+<wire x1="4.05" y1="2" x2="4.05" y2="2.95" width="0.2032" layer="21"/>
+</package>
+<package name="1X02_6.35_SCREWTERM">
+<description>&lt;h3&gt;2 Pin Screw Terminal - 6.35 mm&lt;/h3&gt;
+300VAC-30A Screw Terminal
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count:2&lt;/li&gt;
+&lt;li&gt;Pin pitch: 6.35 mm&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Example device(s):
+&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<pad name="P1" x="-3.175" y="0" drill="1.6" diameter="2.8"/>
+<pad name="P2" x="3.175" y="0" drill="1.6" diameter="2.8"/>
+<wire x1="-6.65" y1="5.362" x2="6.65" y2="5.362" width="0.2032" layer="21"/>
+<wire x1="6.65" y1="5.362" x2="6.65" y2="-7.303" width="0.2032" layer="21"/>
+<wire x1="6.65" y1="-7.303" x2="6.65" y2="-7.9" width="0.2032" layer="21"/>
+<wire x1="6.65" y1="-7.9" x2="-6.65" y2="-7.9" width="0.2032" layer="21"/>
+<wire x1="-6.65" y1="-7.9" x2="-6.65" y2="-7.303" width="0.2032" layer="21"/>
+<wire x1="-6.65" y1="-7.303" x2="-6.65" y2="5.362" width="0.2032" layer="21"/>
+<wire x1="-6.65" y1="-7.303" x2="6.65" y2="-7.303" width="0.2032" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -24007,6 +24059,28 @@ PTH and SMD connector options available.&lt;/p&gt;
 </technologies>
 </device>
 <device name="1X04_NO_SILK_NO_POP" package="1X04_NO_SILK">
+<connects>
+<connect gate="J1" pin="1" pad="1"/>
+<connect gate="J1" pin="2" pad="2"/>
+<connect gate="J1" pin="3" pad="3"/>
+<connect gate="J1" pin="4" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="JST-SMD" package="JST-4-SMD">
+<connects>
+<connect gate="J1" pin="1" pad="1"/>
+<connect gate="J1" pin="2" pad="2"/>
+<connect gate="J1" pin="3" pad="3"/>
+<connect gate="J1" pin="4" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="JST-SMD-LOCKING" package="JST-4-SMD-1.25MM-LOCKING">
 <connects>
 <connect gate="J1" pin="1" pad="1"/>
 <connect gate="J1" pin="2" pad="2"/>
@@ -26586,6 +26660,18 @@ http://www.kemet.com/Lists/ProductCatalog/Attachments/254/KEM_T2005_T491.pdf</de
 <technology name="">
 <attribute name="PROD_ID" value="CAP-08913"/>
 <attribute name="VALUE" value="47pF"/>
+</technology>
+</technologies>
+</device>
+<device name="-0402-25V-5%-X7R" package="0402">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-15063" constant="no"/>
+<attribute name="VALUE" value="47pF" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -31125,13 +31211,14 @@ Out</text>
 <packages>
 <package name="SARA-LGA">
 <description>&lt;h3&gt;ublox SARA LGA form factor&lt;/h3&gt;
-&lt;p&gt;Miniature cellular modem package. Common form factor for many ublox cellular modules, including SARA-R4 and SARA-U2 series'.&lt;/p&gt;
+&lt;p&gt;Miniature cellular modem package. Common form factor for many ublox cellular modules, including SARA-R4 and SARA-U2 series.&lt;/p&gt;
 &lt;p&gt;
 &lt;ul&gt;&lt;li&gt;Dimensions: 26.0 x 16.0 mm&lt;/li&gt;
 &lt;li&gt;Pins: 96&lt;/li&gt;
 &lt;li&gt;Pitch: 1.1mm&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/p&gt;</description>
+&lt;/p&gt;
+&lt;p&gt;As per the SARA System Integration Manual: tRestrict has been added around the ANT and ANT_GNSS pads to reduce parasitic capacitance to ground; restrict has _not_ been added to layer 2 as the prepreg/dielectric thickness will be &gt;= 200µm.&lt;/p&gt;</description>
 <wire x1="13" y1="8" x2="-13" y2="8" width="0.0254" layer="51"/>
 <wire x1="-13" y1="8" x2="-13" y2="-8" width="0.0254" layer="51"/>
 <wire x1="-13" y1="-8" x2="13" y2="-8" width="0.0254" layer="51"/>
@@ -31492,7 +31579,8 @@ Out</text>
 <wire x1="-11.2" y1="-2.75" x2="-12.7" y2="-2.75" width="0.002540625" layer="41"/>
 <wire x1="-11.2" y1="-3.85" x2="-12.7" y2="-3.85" width="0.002540625" layer="41"/>
 <wire x1="-11.2" y1="-4.95" x2="-12.7" y2="-4.95" width="0.002540625" layer="41"/>
-<rectangle x1="-13.2" y1="2.7" x2="-10.8" y2="3.9" layer="42"/>
+<rectangle x1="-13.2" y1="2.7" x2="-10.8" y2="3.9" layer="41"/>
+<rectangle x1="10.8" y1="3.8" x2="13.2" y2="5" layer="41"/>
 </package>
 </packages>
 <symbols>
@@ -33125,7 +33213,7 @@ Supply: 1.65V to 5.5V
 </classes>
 <parts>
 <part name="FRAME1" library="SparkFun-Aesthetics" deviceset="FRAME-LEDGER" device=""/>
-<part name="J1" library="SparkFun-Connectors" deviceset="USB_C" device="_2-LAYER_PADS"/>
+<part name="J1" library="SparkFun-Connectors" deviceset="USB_C" device="_4-LAYER_PADS"/>
 <part name="R2" library="SparkFun-Resistors" deviceset="5.1KOHM" device="5.1KOHM-0603-1/10W-1%" value="5.1k"/>
 <part name="R3" library="SparkFun-Resistors" deviceset="5.1KOHM" device="5.1KOHM-0603-1/10W-1%" value="5.1k"/>
 <part name="GND8" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -33358,7 +33446,7 @@ Supply: 1.65V to 5.5V
 <part name="R29" library="SparkFun-Resistors" deviceset="2.2KOHM" device="-0603-1/10W-1%" value="2.2k"/>
 <part name="R30" library="SparkFun-Resistors" deviceset="2.2KOHM" device="-0603-1/10W-1%" value="2.2k"/>
 <part name="SUPPLY42" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
-<part name="J6" library="SparkFun-Connectors" deviceset="CONN_05" device="NO_SILK" value="SPI"/>
+<part name="J6" library="SparkFun-Connectors" deviceset="CONN_05" device="NO_SILK" value="DIAG"/>
 <part name="GND17" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY44" library="SparkFun-PowerSymbols" deviceset="VIN" device=""/>
 <part name="SUPPLY45" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
@@ -33458,6 +33546,10 @@ Supply: 1.65V to 5.5V
 <part name="SUPPLY54" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="JP19" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
 <part name="JP21" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="TP13" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
+<part name="TP22" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
+<part name="TP23" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
+<part name="TP24" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
 </parts>
 <sheets>
 <sheet>
@@ -34281,6 +34373,12 @@ with the 3.3V regulator.</text>
 <instance part="JP21" gate="G$1" x="137.16" y="22.86" smashed="yes">
 <attribute name="NAME" x="130.048" y="23.241" size="1.778" layer="95" font="vector"/>
 </instance>
+<instance part="TP23" gate="G$1" x="300.99" y="260.35" smashed="yes" rot="R90">
+<attribute name="NAME" x="299.72" y="257.81" size="1.778" layer="95" font="vector" rot="R90"/>
+</instance>
+<instance part="TP24" gate="G$1" x="359.41" y="181.61" smashed="yes" rot="R90">
+<attribute name="NAME" x="358.14" y="179.07" size="1.778" layer="95" font="vector" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -34913,6 +35011,9 @@ with the 3.3V regulator.</text>
 <wire x1="365.76" y1="180.34" x2="373.38" y2="180.34" width="0.1524" layer="91"/>
 <wire x1="373.38" y1="180.34" x2="373.38" y2="185.42" width="0.1524" layer="91"/>
 <junction x="365.76" y="180.34"/>
+<pinref part="TP24" gate="G$1" pin="1"/>
+<wire x1="359.41" y1="181.61" x2="359.41" y2="180.34" width="0.1524" layer="91"/>
+<wire x1="359.41" y1="180.34" x2="365.76" y2="180.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="I2C_SCL" class="0">
@@ -35969,12 +36070,16 @@ with the 3.3V regulator.</text>
 <pinref part="Q6" gate="G$1" pin="D"/>
 <pinref part="J11" gate="G$1" pin="VCC"/>
 <wire x1="292.1" y1="248.92" x2="292.1" y2="254" width="0.1524" layer="91"/>
-<wire x1="312.42" y1="256.54" x2="297.18" y2="256.54" width="0.1524" layer="91"/>
+<wire x1="312.42" y1="256.54" x2="300.99" y2="256.54" width="0.1524" layer="91"/>
+<wire x1="300.99" y1="256.54" x2="297.18" y2="256.54" width="0.1524" layer="91"/>
 <wire x1="297.18" y1="256.54" x2="297.18" y2="248.92" width="0.1524" layer="91"/>
 <wire x1="297.18" y1="248.92" x2="292.1" y2="248.92" width="0.1524" layer="91"/>
 <pinref part="C46" gate="G$1" pin="1"/>
 <wire x1="292.1" y1="243.84" x2="292.1" y2="248.92" width="0.1524" layer="91"/>
 <junction x="292.1" y="248.92"/>
+<pinref part="TP23" gate="G$1" pin="1"/>
+<wire x1="300.99" y1="256.54" x2="300.99" y2="260.35" width="0.1524" layer="91"/>
+<junction x="300.99" y="256.54"/>
 </segment>
 </net>
 <net name="N$29" class="0">
@@ -36037,56 +36142,56 @@ with the 3.3V regulator.</text>
 <pinref part="JP8" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="N$19" class="0">
+<net name="G0" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G0/BUS0"/>
 <pinref part="JP10" gate="G$1" pin="1"/>
 <wire x1="127" y1="45.72" x2="132.08" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$40" class="0">
+<net name="G1" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G1/BUS1"/>
 <pinref part="JP11" gate="G$1" pin="1"/>
 <wire x1="127" y1="43.18" x2="132.08" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$41" class="0">
+<net name="G2" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G2/BUS2"/>
 <pinref part="JP12" gate="G$1" pin="1"/>
 <wire x1="127" y1="40.64" x2="132.08" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$42" class="0">
+<net name="G3" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G3/BUS3"/>
 <pinref part="JP13" gate="G$1" pin="1"/>
 <wire x1="127" y1="38.1" x2="132.08" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$43" class="0">
+<net name="G4" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G4/BUS4"/>
 <pinref part="JP14" gate="G$1" pin="1"/>
 <wire x1="127" y1="35.56" x2="132.08" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$44" class="0">
+<net name="G5" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G5/BUS5"/>
 <pinref part="JP15" gate="G$1" pin="1"/>
 <wire x1="127" y1="33.02" x2="132.08" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$45" class="0">
+<net name="G6" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G6/BUS6"/>
 <pinref part="JP16" gate="G$1" pin="1"/>
 <wire x1="127" y1="30.48" x2="132.08" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$46" class="0">
+<net name="G7" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G7/BUS7"/>
 <pinref part="JP17" gate="G$1" pin="1"/>
@@ -36109,7 +36214,7 @@ with the 3.3V regulator.</text>
 <wire x1="63.5" y1="50.8" x2="63.5" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="SARA_ON" class="0">
+<net name="SARA_!ON!" class="0">
 <segment>
 <wire x1="144.78" y1="22.86" x2="147.32" y2="22.86" width="0.1524" layer="91"/>
 <label x="147.32" y="22.86" size="1.27" layer="95" xref="yes"/>
@@ -36121,14 +36226,14 @@ with the 3.3V regulator.</text>
 <junction x="144.78" y="22.86"/>
 </segment>
 </net>
-<net name="N$48" class="0">
+<net name="G10" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G10/ADC_D+/CAM_VSYNC"/>
 <pinref part="JP19" gate="G$1" pin="1"/>
 <wire x1="127" y1="20.32" x2="132.08" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$50" class="0">
+<net name="G9" class="0">
 <segment>
 <pinref part="J4" gate="J1" pin="G9/ADC_D-/CAM_HSYNC"/>
 <pinref part="JP21" gate="G$1" pin="1"/>
@@ -36141,14 +36246,14 @@ with the 3.3V regulator.</text>
 <plain>
 <text x="351.028" y="11.43" size="2.54" layer="94">Paul Clark</text>
 <text x="421.64" y="7.112" size="2.54" layer="94">v10</text>
-<text x="101.346" y="266.192" size="1.27" layer="97">Board thickness: 1.6mm</text>
-<text x="101.346" y="261.112" size="1.27" layer="97">Er: 4.6</text>
-<text x="101.346" y="268.732" size="1.27" layer="97">Copper Thickness (1oz): 1.4mil/0.035mm</text>
-<text x="101.346" y="256.032" size="1.27" layer="97">RF Trace Width: 13.8mil/0.35mm</text>
-<text x="101.346" y="258.572" size="1.27" layer="97">Polygon Isolation: 8mil/0.2032mm</text>
-<text x="101.346" y="263.652" size="1.27" layer="97">Dielectric thickness (layer 1 to 2): 0.2mm</text>
-<text x="101.346" y="253.492" size="0.762" layer="97">https://chemandy.com/calculators/coplanar-waveguide-with-ground-calculator.htm</text>
-<text x="101.346" y="271.272" size="1.524" layer="97" ratio="15">Microstrip Calculation:</text>
+<text x="98.806" y="268.732" size="1.27" layer="97">Board thickness: 1.6mm</text>
+<text x="98.806" y="263.652" size="1.27" layer="97">Er: 4.6</text>
+<text x="98.806" y="271.272" size="1.27" layer="97">Copper Thickness (1oz): 1.4mil/0.035mm</text>
+<text x="98.806" y="258.572" size="1.27" layer="97">RF Trace Width: 13.8mil/0.35mm</text>
+<text x="98.806" y="261.112" size="1.27" layer="97">Polygon Isolation: 8mil/0.2032mm</text>
+<text x="98.806" y="266.192" size="1.27" layer="97">Prepreg dielectric thickness (layer 1 to 2): 0.2mm</text>
+<text x="98.806" y="256.032" size="0.762" layer="97">https://chemandy.com/calculators/coplanar-waveguide-with-ground-calculator.htm</text>
+<text x="98.806" y="273.812" size="1.524" layer="97" ratio="15">Microstrip Calculation:</text>
 <wire x1="91.44" y1="279.4" x2="91.44" y2="200.66" width="0.2032" layer="97" style="longdash"/>
 <text x="27.94" y="261.62" size="2.54" layer="97">50Ω</text>
 <text x="55.88" y="261.62" size="2.54" layer="97">50Ω</text>
@@ -36162,6 +36267,8 @@ with the 3.3V regulator.</text>
 <wire x1="210.82" y1="134.62" x2="0" y2="134.62" width="0.2032" layer="97" style="longdash"/>
 <wire x1="210.82" y1="200.66" x2="210.82" y2="134.62" width="0.2032" layer="97" style="longdash"/>
 <wire x1="431.8" y1="134.62" x2="210.82" y2="134.62" width="0.2032" layer="97" style="longdash"/>
+<text x="98.806" y="250.952" size="1.27" layer="97">SARA ANT and ANT_GNSS pads do not require restrict on layer 2
+as the prepreg thickness is &gt;= 200µm</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -36581,6 +36688,12 @@ with the 3.3V regulator.</text>
 <instance part="SUPPLY54" gate="G$1" x="182.88" y="175.26" smashed="yes">
 <attribute name="VALUE" x="182.88" y="178.054" size="1.778" layer="96" font="vector" align="bottom-center"/>
 </instance>
+<instance part="TP13" gate="G$1" x="167.64" y="162.56" smashed="yes" rot="R90">
+<attribute name="NAME" x="166.37" y="160.02" size="1.778" layer="95" font="vector" rot="R90"/>
+</instance>
+<instance part="TP22" gate="G$1" x="195.58" y="238.76" smashed="yes" rot="R90">
+<attribute name="NAME" x="194.31" y="236.22" size="1.778" layer="95" font="vector" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -36804,6 +36917,9 @@ with the 3.3V regulator.</text>
 <pinref part="C21" gate="G$1" pin="1"/>
 <wire x1="190.5" y1="231.14" x2="190.5" y2="233.68" width="0.1524" layer="91"/>
 <junction x="190.5" y="233.68"/>
+<pinref part="TP22" gate="G$1" pin="1"/>
+<wire x1="195.58" y1="238.76" x2="195.58" y2="233.68" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="233.68" x2="190.5" y2="233.68" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SARA_ANT_GNSS" class="0">
@@ -37354,7 +37470,7 @@ with the 3.3V regulator.</text>
 <wire x1="167.64" y1="149.86" x2="165.1" y2="149.86" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="SARA_ON" class="0">
+<net name="SARA_!ON!" class="0">
 <segment>
 <pinref part="Q7" gate="NMOS" pin="D"/>
 <pinref part="R43" gate="G$1" pin="1"/>
@@ -37367,6 +37483,9 @@ with the 3.3V regulator.</text>
 <wire x1="182.88" y1="160.02" x2="185.42" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="182.88" y1="162.56" x2="182.88" y2="160.02" width="0.1524" layer="91"/>
 <junction x="182.88" y="160.02"/>
+<pinref part="TP13" gate="G$1" pin="1"/>
+<wire x1="167.64" y1="162.56" x2="167.64" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="167.64" y1="160.02" x2="175.26" y2="160.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$49" class="0">
