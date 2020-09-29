@@ -21014,11 +21014,17 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="23.622" y="65.913" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
 </element>
 <element name="C18" library="New_Parts" package="0402" value="33pF" x="20.32" y="65.532" smashed="yes" rot="R180">
+<attribute name="DIGIKEY_PART" value="490-5936-1-ND" x="20.32" y="65.532" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANUFACTURER" value="Murata" x="20.32" y="65.532" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANU_PART" value="GRM1555C1H330JA" x="20.32" y="65.532" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="20.32" y="64.77" size="0.6096" layer="25" font="vector" ratio="20" rot="R180" align="bottom-center"/>
 <attribute name="PROD_ID" value="" x="20.32" y="65.532" size="1.778" layer="27" ratio="15" rot="R180" display="off"/>
 <attribute name="VALUE" value="33pF" x="20.32" y="66.294" size="0.6096" layer="27" font="vector" ratio="20" rot="R180" align="top-center"/>
 </element>
 <element name="C19" library="New_Parts" package="0402" value="27pF" x="19.177" y="58.928" smashed="yes" rot="R180">
+<attribute name="DIGIKEY_PART" value="490-11384-1-ND" x="19.177" y="58.928" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANUFACTURER" value="Murata" x="19.177" y="58.928" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANU_PART" value="GRM1555C1H270JA" x="19.177" y="58.928" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="19.177" y="58.166" size="0.6096" layer="25" font="vector" ratio="20" rot="R180" align="bottom-center"/>
 <attribute name="PROD_ID" value="" x="19.177" y="58.928" size="1.778" layer="27" ratio="15" rot="R180" display="off"/>
 <attribute name="VALUE" value="27pF" x="19.177" y="59.69" size="0.6096" layer="27" font="vector" ratio="20" rot="R180" align="top-center"/>
@@ -24371,11 +24377,11 @@ design rules under a new name.</description>
 <approved hash="19,16,331b9ef8d916f63c"/>
 <approved hash="6,1,5c4512b306b1ba1d"/>
 <approved hash="6,1,5fe0b7b26c160bbe"/>
-<approved hash="5,1,9eeef277ecf410ab"/>
 <approved hash="5,1,03c7ae3e324b5e9f"/>
 <approved hash="19,16,efae583110579a4f"/>
-<approved hash="5,1,b09142b6df0f51db"/>
-<approved hash="5,1,28d7201dcd136286"/>
+<approved hash="5,1,0c470d71ebe87a18"/>
+<approved hash="5,1,5787c088dd1f36e3"/>
+<approved hash="5,1,3231d76570aa32a1"/>
 </errors>
 </board>
 </drawing>

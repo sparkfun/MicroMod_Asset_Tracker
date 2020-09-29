@@ -32552,6 +32552,9 @@ A =&gt; B : DIR = VCCA</text>
 </connects>
 <technologies>
 <technology name="">
+<attribute name="DIGIKEY_PART" value="490-5936-1-ND" constant="no"/>
+<attribute name="MANUFACTURER" value="Murata" constant="no"/>
+<attribute name="MANU_PART" value="GRM1555C1H330JA" constant="no"/>
 <attribute name="PROD_ID" value="" constant="no"/>
 <attribute name="VALUE" value="33pF" constant="no"/>
 </technology>
@@ -32573,6 +32576,9 @@ A =&gt; B : DIR = VCCA</text>
 </connects>
 <technologies>
 <technology name="">
+<attribute name="DIGIKEY_PART" value="490-11384-1-ND" constant="no"/>
+<attribute name="MANUFACTURER" value="Murata" constant="no"/>
+<attribute name="MANU_PART" value="GRM1555C1H270JA" constant="no"/>
 <attribute name="PROD_ID" value="" constant="no"/>
 <attribute name="VALUE" value="27pF" constant="no"/>
 </technology>
