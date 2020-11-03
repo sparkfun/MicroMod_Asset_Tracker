@@ -98,7 +98,7 @@ const int EXT_SPI_CS = D0; // Output: Active low
 
 const int MICROSD_CS     = G0; // Output: Active low
 const int MICROSD_PWR_EN = G1; // Output: Pull low to enable power for the SD card. Pull high to disable.
-const int SARA_PWR       = G2; // Output: Pull low then high to switch the SARA-R5 on. Pull low then high again to switch it off.
+const int SARA_PWR       = G2; // Output: Pull high then low to switch the SARA-R5 on. Pull high for five seconds then low again to switch it off.
 const int IMU_PWR_EN     = G3; // Output: Pull high to enable power for the IMU. Pull low to disable.
 const int SARA_RI        = G4; // Input:  SARA-R5 Ring Indicator pin. Becomes CTS2 in 2-UART mode.
 const int SARA_INT       = G5; // Input:  SARA-R5 EXT_INT interrupt pin.

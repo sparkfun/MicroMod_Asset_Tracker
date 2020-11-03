@@ -53,16 +53,27 @@ void setup()
 
   SD_and_IMU_SPI.begin(); // Begin SPI comms
 
-  enableIMUPower(); // Enable power for the IMU
-
   SERIAL_PORT.begin(115200); // Start the serial console
   SERIAL_PORT.println(F("Asset Tracker Example"));
 
+  delay(100);
+
+  while (SERIAL_PORT.available()) // Make sure the serial RX buffer is empty
+    SERIAL_PORT.read();
+
+  SERIAL_PORT.println(F("IMU power is OFF"));
+  SERIAL_PORT.println(F("Press any key to continue..."));
+
+  while (!SERIAL_PORT.available()) // Wait for the user to press a key (send any serial character)
+    ;
+
   digitalWrite(LED_BUILTIN, HIGH);
+
+  enableIMUPower(); // Enable power for the IMU
 
   delay(1000); // Give the IMU time to start up
 
-  // TO DO: Insert "Press Any Key To Continue" code here. Wait for key press then clear serial buffer.
+  SERIAL_PORT.println(F("IMU power is ON"));
   
   bool initialized = false;
   while( !initialized )

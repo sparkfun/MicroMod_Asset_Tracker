@@ -30,9 +30,9 @@ void initializeAssetTrackerPins()
   
   disableMicroSDPower();
 
-  digitalWrite(SARA_PWR, HIGH); // Make sure SARA_PWR is high before making the pin an output
+  digitalWrite(SARA_PWR, LOW); // Make sure SARA_PWR is low before making the pin an output
   pinMode(SARA_PWR, OUTPUT);
-  digitalWrite(SARA_PWR, HIGH);
+  digitalWrite(SARA_PWR, LOW);
 
   disableIMUPower();
 
