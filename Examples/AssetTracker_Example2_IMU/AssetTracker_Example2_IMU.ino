@@ -51,8 +51,6 @@ void setup()
 {
   initializeAssetTrackerPins(); // Initialize the pins and ports (defined in AssetTrackerPins.ino)
 
-  SD_and_IMU_SPI.begin(); // Begin SPI comms
-
   SERIAL_PORT.begin(115200); // Start the serial console
   SERIAL_PORT.println(F("Asset Tracker Example"));
 
@@ -70,6 +68,9 @@ void setup()
   digitalWrite(LED_BUILTIN, HIGH);
 
   enableIMUPower(); // Enable power for the IMU
+  enableMicroSDPower(); // Enable power for the microSD card too - otherwise we have SPI communication problems
+
+  SD_and_IMU_SPI.begin(); // Begin SPI comms
 
   delay(1000); // Give the IMU time to start up
 

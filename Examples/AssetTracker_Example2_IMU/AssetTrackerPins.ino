@@ -25,22 +25,21 @@ void initializeAssetTrackerPins()
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
   
-  pinMode(MICROSD_CS, OUTPUT);
-  digitalWrite(MICROSD_CS, HIGH);
-  
   disableMicroSDPower();
+
+  disableIMUPower();
+
+  disableSPIPins();
+
+  disableGNSSAntennaPower();
 
   digitalWrite(SARA_PWR, LOW); // Make sure SARA_PWR is low before making the pin an output
   pinMode(SARA_PWR, OUTPUT);
   digitalWrite(SARA_PWR, LOW);
 
-  disableIMUPower();
-
   pinMode(SARA_RI, INPUT);
   
   pinMode(SARA_INT, INPUT);
-
-  disableGNSSAntennaPower();
 
   if (SARA_DSR >= 0) pinMode(SARA_DSR, INPUT);
 
@@ -50,13 +49,24 @@ void initializeAssetTrackerPins()
 
   pinMode(IMU_INT, INPUT);
 
-  pinMode(IMU_CS, INPUT);
-  digitalWrite(IMU_CS, HIGH);
-
   pinMode(VIN_DIV_3, INPUT);
 
 }
 
+// Disable SPI pins - to avoid parasitic power leaking throug the SD card
+void disableSPIPins()
+{
+  pinMode(MICROSD_CS, OUTPUT);
+  digitalWrite(MICROSD_CS, LOW); // Pull CS low to reduce current leak through the SD card
+  pinMode(IMU_CS, OUTPUT);
+  digitalWrite(IMU_CS, LOW); // Pull CS low to reduce sleep current
+  pinMode(MISO, OUTPUT);
+  digitalWrite(MISO, LOW); // Pull MISO low to reduce current leak through the SD card
+  pinMode(MOSI, OUTPUT);
+  digitalWrite(MOSI, LOW); // Pull MOSI low to reduce current leak through the SD card
+  pinMode(SCK, OUTPUT);
+  digitalWrite(SCK, LOW); // Pull SCK low to reduce current leak through the SD card
+}
 // Disable power for the micro SD card
 void disableMicroSDPower()
 {
@@ -68,6 +78,8 @@ void enableMicroSDPower()
 {
   pinMode(MICROSD_PWR_EN, OUTPUT); // Define the pinMode here in case a sleep function has disabled it
   digitalWrite(MICROSD_PWR_EN, LOW);
+  pinMode(MICROSD_CS, OUTPUT);
+  digitalWrite(MICROSD_CS, HIGH); // Pull CS high to disable the SD card
 }
 
 // Disable power for the IMU
@@ -81,6 +93,8 @@ void enableIMUPower()
 {
   pinMode(IMU_PWR_EN, OUTPUT); // Define the pinMode here in case a sleep function has disabled it
   digitalWrite(IMU_PWR_EN, HIGH);
+  pinMode(IMU_CS, OUTPUT);
+  digitalWrite(IMU_CS, HIGH); // Pull CS high to disable the IMU
 }
 
 // Disable power for the GNSS active antenna
