@@ -9,7 +9,8 @@
   Date: October 30th 2020
 
   This example tests the external SPI pins using a Micro OLED display:
-  https://www.sparkfun.com/products/13003
+  https://www.sparkfun.com/products/13003 (SOLOMON SYSTECH SSD1306)
+  
   Connect:
   Display  Asset_Tracker
   GND      GND
