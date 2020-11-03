@@ -109,3 +109,23 @@ void enableGNSSAntennaPower()
   pinMode(ANT_PWR_EN, OUTPUT); // Define the pinMode here in case a sleep function has disabled it
   digitalWrite(ANT_PWR_EN, HIGH);
 }
+
+// Read VIN / 3
+// Return the true voltage (compensating for processor type)
+float readVIN()
+{
+  float vin = analogRead(VIN_DIV_3);
+#if defined(ARDUINO_ARDUINO_NANO33BLE)
+  vin *= 3.3 / 1023.0; // nRF52840 (Arduino NANO 33 BLE) is 3.3V and defaults to 10-bit
+#elif defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD)
+  vin *= 2.0 / 1023.0; // Artemis (APOLLO3) is 2.0V and defaults to 10-bit
+#elif defined(ARDUINO_ARCH_ESP32)
+  vin *= 3.3 / 4095.0; // ESP32 is 3.3V and defaults to 12-bit
+#elif defined(ARDUINO_ARCH_SAMD)
+  vin *= 3.3 / 1023.0; // SAMD51 is 3.3V and defaults to 10-bit
+#else
+  vin *= 1.0; // Undefined PB!
+#endif
+  vin *= 3.0; // Correct for resistor divider
+  return (vin);
+}
