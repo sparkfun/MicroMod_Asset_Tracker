@@ -45,7 +45,7 @@ void initializeAssetTrackerPins()
 
   if (SARA_ON >= 0) pinMode(SARA_ON, INPUT);
 
-  if (SARA_ON >= 0) pinMode(SARA_ON_ALT, INPUT);
+  if (SARA_ON_ALT >= 0) pinMode(SARA_ON_ALT, INPUT);
 
   pinMode(IMU_INT, INPUT);
 
