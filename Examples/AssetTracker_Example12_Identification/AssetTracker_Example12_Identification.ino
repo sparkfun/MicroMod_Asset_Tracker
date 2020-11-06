@@ -3,12 +3,22 @@
   MicroMod Asset Tracker Example
   ==============================
 
-  Network Info
+  Identification
 
   Written by: Paul Clark
   Date: October 30th 2020
 
-  This example demonstrates how to register the SARA on the selected network.
+  This example demonstrates how to read the SARA's:
+    Manufacturer identification
+    Model identification
+    Firmware version identification
+    Product Serial No.
+    IMEI identification
+    IMSI identification
+    SIM CCID
+    Subscriber number
+    Capabilities
+    SIM state
 
   The pins and ports are defined in AssetTrackerPins.ino.
 
@@ -48,42 +58,27 @@
 // Create a SARA_R5 object to use throughout the sketch. Pass it the power pin number.
 SARA_R5 assetTracker(SARA_PWR);
 
-// Map registration status messages to more readable strings
-String registrationString[] =
+// Map SIM states to more readable strings
+String simStateString[] =
 {
-  "Not registered",                         // 0
-  "Registered, home",                       // 1
-  "Searching for operator",                 // 2
-  "Registration denied",                    // 3
-  "Registration unknown",                   // 4
-  "Registered, roaming",                    // 5
-  "Registered, home (SMS only)",            // 6
-  "Registered, roaming (SMS only)",         // 7
-  "Registered, emergency service only",     // 8
-  "Registered, home, CSFB not preferred",   // 9
-  "Registered, roaming, CSFB not prefered"  // 10
+  "Not present",      // 0
+  "PIN needed",       // 1
+  "PIN blocked",      // 2
+  "PUK blocked",      // 3
+  "Not operational",  // 4
+  "Restricted",       // 5
+  "Operational"       // 6
 };
 
-// Network operator can be set to e.g.:
-// MNO_SW_DEFAULT -- DEFAULT
-// MNO_SIM_ICCID -- SIM DEFAULT
-// MNO_ATT -- AT&T 
-// MNO_VERIZON -- Verizon
-// MNO_TELSTRA -- Telstra
-// MNO_TMO -- T-Mobile US
-// MNO_CT -- China Telecom
-// MNO_VODAFONE
-// MNO_STD_EUROPE
-const mobile_network_operator_t MOBILE_NETWORK_OPERATOR = MNO_SIM_ICCID;
-
-// APN -- Access Point Name. Gateway between GPRS MNO
-// and another computer network. E.g. "hologram
-//const String APN = "hologram";
-
-// The APN can be omitted: this is the so-called "blank APN" setting that may be suggested by
-// network operators (e.g. to roaming devices); in this case the APN string is not included in
-// the message sent to the network.
-const String APN = "";
+// processSIMstate is provided to the SARA-R5 library via a 
+// callback setter -- setSIMstateReadCallback. (See setup())
+void processSIMstate(SARA_R5_sim_states_t state)
+{
+  Serial.println();
+  Serial.print(F("SIM state:           "));
+  Serial.print(String(state));
+  Serial.println();
+}
 
 void setup()
 {
@@ -125,34 +120,24 @@ void setup()
   }
   SERIAL_PORT.println();
 
-  if (!assetTracker.setNetwork(MOBILE_NETWORK_OPERATOR))
-  {
-    SERIAL_PORT.println(F("Error setting network. Try cycling the power."));
-    while (1) ;
-  }
-  
-  if (assetTracker.setAPN(APN) == SARA_R5_SUCCESS)
-  {
-    SERIAL_PORT.println(F("APN successfully set."));
-  }
-  
-  SERIAL_PORT.println(F("Network set. Ready to go!"));
-  
-  // RSSI: Received signal strength:
-  SERIAL_PORT.println("RSSI: " + String(assetTracker.rssi()));
-  // Registration Status
-  int regStatus = assetTracker.registration();
-  if ((regStatus >= 0) && (regStatus <= 10))
-  {
-    SERIAL_PORT.println("Network registration: " + registrationString[regStatus]);
-  }
-  
-  if (regStatus > 0) {
-    SERIAL_PORT.println(F("All set. Go to the next example!"));
-  }
+  Serial.println("Manufacturer ID:     " + String(assetTracker.getManufacturerID()));
+  Serial.println("Model ID:            " + String(assetTracker.getModelID()));
+  Serial.println("Firmware Version:    " + String(assetTracker.getFirmwareVersion()));
+  Serial.println("Product Serial No.:  " + String(assetTracker.getSerialNo()));
+  Serial.println("IMEI:                " + String(assetTracker.getIMEI()));
+  Serial.println("IMSI:                " + String(assetTracker.getIMSI()));
+  Serial.println("SIM CCID:            " + String(assetTracker.getCCID()));
+  Serial.println("Subscriber No.:      " + String(assetTracker.getSubscriberNo()));
+  Serial.println("Capabilities:        " + String(assetTracker.getCapabilities()));
+
+  // Set a callback to return the SIM state once requested
+  assetTracker.setSIMstateReadCallback(&processSIMstate);
+  // Now enable SIM state reporting (for states 0 to 6)
+  if (assetTracker.setSIMstateReportingMode(1) == SARA_R5_SUCCESS)
+    Serial.println("SIM state reports requested...");   
 }
 
 void loop()
 {
-  // Do nothing. Now that we're registered move on to the next example.
+  assetTracker.poll(); // Keep processing data from the SARA so we can extract the SIM status
 }

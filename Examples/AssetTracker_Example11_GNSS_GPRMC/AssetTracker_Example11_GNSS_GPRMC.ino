@@ -80,6 +80,7 @@ void setup()
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
   // Initialize the SARA using SARA_Serial and 9600 Baud
+  // begin calls init. init sets: SARA GPIO1 to NETWORK_STATUS, and SARA GPIO6 to TIME_PULSE_OUTPUT
   if (assetTracker.begin(SARA_Serial, 9600) )
   {
     SERIAL_PORT.println(F("Asset Tracker (SARA-R5) connected!"));
@@ -95,6 +96,22 @@ void setup()
 
   // Enable power for the GNSS active antenna
   enableGNSSAntennaPower();
+
+  // From the u-blox SARA-R5 Positioning Implementation Application Note UBX-20012413 - R01
+  // To enable the PPS output we need to:
+  // Enable the timing information request with +UTIMEIND=1
+  // Reset the time offset configuration with +UTIMECFG=0,0
+  // Configure GPIO6 for TIME_PULSE_OUTPUT: .init does this
+  // Request PPS output using GNSS+LTE (Best effort) with +UTIME=1,1
+
+  // Enable the timing information request
+  //assetTracker.setUtimeIndication(); // Use default (SARA_R5_UTIME_URC_CONFIGURATION_ENABLED)
+  
+  // Clear the time offset
+  assetTracker.setUtimeConfiguration(); // Use default offset (offsetNanoseconds = 0, offsetSeconds = 0)
+  
+  // Set the UTIME mode to pulse-per-second output using a best effort from GNSS and LTE
+  assetTracker.setUtimeMode(); // Use defaults (mode = SARA_R5_UTIME_MODE_PPS, sensor = SARA_R5_UTIME_SENSOR_GNSS_LTE)
 }
 
 void loop()

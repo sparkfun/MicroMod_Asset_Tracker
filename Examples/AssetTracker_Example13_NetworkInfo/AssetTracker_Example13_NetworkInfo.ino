@@ -3,21 +3,12 @@
   MicroMod Asset Tracker Example
   ==============================
 
-  Identification
+  Network Info
 
   Written by: Paul Clark
   Date: October 30th 2020
 
-  This example demonstrates how to read the SARA's:
-    Manufacturer identification
-    Model identification
-    Firmware version identification
-    Product Serial No.
-    IMEI identification
-    IMSI identification
-    SIM CCID
-    Subscriber number
-    Capabilities
+  This example demonstrates how to register the SARA on the selected network.
 
   The pins and ports are defined in AssetTrackerPins.ino.
 
@@ -57,6 +48,53 @@
 // Create a SARA_R5 object to use throughout the sketch. Pass it the power pin number.
 SARA_R5 assetTracker(SARA_PWR);
 
+// Map registration status messages to more readable strings
+String registrationString[] =
+{
+  "Not registered",                         // 0
+  "Registered, home",                       // 1
+  "Searching for operator",                 // 2
+  "Registration denied",                    // 3
+  "Registration unknown",                   // 4
+  "Registered, roaming",                    // 5
+  "Registered, home (SMS only)",            // 6
+  "Registered, roaming (SMS only)",         // 7
+  "Registered, emergency service only",     // 8
+  "Registered, home, CSFB not preferred",   // 9
+  "Registered, roaming, CSFB not prefered"  // 10
+};
+
+// Network operator can be set to e.g.:
+// MNO_SW_DEFAULT -- DEFAULT (Undefined / regulatory)
+// MNO_SIM_ICCID -- SIM DEFAULT
+// MNO_ATT -- AT&T 
+// MNO_VERIZON -- Verizon
+// MNO_TELSTRA -- Telstra
+// MNO_TMO -- T-Mobile US
+// MNO_CT -- China Telecom
+// MNO_SPRINT
+// MNO_VODAFONE
+// MNO_NTT_DOCOMO
+// MNO_TELUS
+// MNO_SOFTBANK
+// MNO_DT -- Deutsche Telekom
+// MNO_US_CELLULAR
+// MNO_SKT
+// MNO_GLOBAL -- SARA factory-programmed value
+// MNO_STD_EUROPE
+// MNO_STD_EU_NOEPCO
+
+const mobile_network_operator_t MOBILE_NETWORK_OPERATOR = MNO_GLOBAL;
+
+// APN -- Access Point Name. Gateway between GPRS MNO
+// and another computer network. E.g. "hologram
+//const String APN = "hologram";
+
+// The APN can be omitted: this is the so-called "blank APN" setting that may be suggested by
+// network operators (e.g. to roaming devices); in this case the APN string is not included in
+// the message sent to the network.
+const String APN = "";
+
 void setup()
 {
   initializeAssetTrackerPins(); // Initialize the pins and ports (defined in AssetTrackerPins.ino)
@@ -84,7 +122,6 @@ void setup()
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
   // Initialize the SARA using SARA_Serial and 9600 Baud
-  // begin calls init. init sets: SARA GPIO1 to NETWORK_STATUS, and SARA GPIO6 to TIME_PULSE_OUTPUT
   if (assetTracker.begin(SARA_Serial, 9600) )
   {
     SERIAL_PORT.println(F("Asset Tracker (SARA-R5) connected!"));
@@ -97,18 +134,34 @@ void setup()
   }
   SERIAL_PORT.println();
 
-  Serial.println("Manufacturer ID:     " + String(assetTracker.getManufacturerID()));
-  Serial.println("Model ID:            " + String(assetTracker.getModelID()));
-  Serial.println("Firmware Version:    " + String(assetTracker.getFirmwareVersion()));
-  Serial.println("Product Serial No.:  " + String(assetTracker.getSerialNo()));
-  Serial.println("IMEI:                " + String(assetTracker.getIMEI()));
-  Serial.println("IMSI:                " + String(assetTracker.getIMSI()));
-  Serial.println("SIM CCID:            " + String(assetTracker.getCCID()));
-  Serial.println("Subscriber No.:      " + String(assetTracker.getSubscriberNo()));
-  Serial.println("Capabilities:        " + String(assetTracker.getCapabilities()));
+  if (!assetTracker.setNetwork(MOBILE_NETWORK_OPERATOR))
+  {
+    SERIAL_PORT.println(F("Error setting network. Try cycling the power."));
+    while (1) ;
+  }
+  
+  if (assetTracker.setAPN(APN) == SARA_R5_SUCCESS)
+  {
+    SERIAL_PORT.println(F("APN successfully set."));
+  }
+  
+  SERIAL_PORT.println(F("Network set. Ready to go!"));
+  
+  // RSSI: Received signal strength:
+  SERIAL_PORT.println("RSSI: " + String(assetTracker.rssi()));
+  // Registration Status
+  int regStatus = assetTracker.registration();
+  if ((regStatus >= 0) && (regStatus <= 10))
+  {
+    SERIAL_PORT.println("Network registration: " + registrationString[regStatus]);
+  }
+  
+  if (regStatus > 0) {
+    SERIAL_PORT.println(F("All set. Go to the next example!"));
+  }
 }
 
 void loop()
 {
-  // Do nothing. Move on to the next example.
+  // Do nothing. Now that we're registered move on to the next example.
 }
