@@ -218,6 +218,10 @@ void setup()
     {
       newConnection = false;
     }
+    else
+    {
+      assetTracker.deregisterOperator(); // Deregister from the current operator so we can connect to a new one
+    }
     while (SERIAL_PORT.available()) SERIAL_PORT.read();
   }
 
