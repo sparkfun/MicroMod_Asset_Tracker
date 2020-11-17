@@ -86,7 +86,7 @@ String registrationString[] =
 
 // MNO_GLOBAL is the factory-programmed default
 // If you are in Europe, you may find no operators unless you choose MNO_STD_EUROPE
-const mobile_network_operator_t MOBILE_NETWORK_OPERATOR = MNO_STD_EUROPE;
+const mobile_network_operator_t MOBILE_NETWORK_OPERATOR = MNO_GLOBAL;
 
 const String MOBILE_NETWORK_STRINGS[] = {"default (Undefined/Regulatory)", "SIM ICCID", "AT&T", "Verizon", 
   "Telstra", "T-Mobile US", "China Telecom", "Sprint", "Vodafone", "NTT DoCoMo", "Telus", "SoftBank",
@@ -146,16 +146,6 @@ int convertOperatorNumber( mobile_network_operator_t mno)
   }
 }
 
-// APN -- Access Point Name. Gateway between GPRS MNO
-// and another computer network. E.g. "hologram" or "internet"
-//const String APN = "hologram";
-const String APN = "internet";
-
-// The APN can be omitted: this is the so-called "blank APN" setting that may be suggested by
-// network operators (e.g. to roaming devices); in this case the APN string is not included in
-// the message sent to the network.
-//const String APN = "";
-
 // This defines the size of the ops struct array. To narrow the operator
 // list, set MOBILE_NETWORK_OPERATOR to AT&T, Verizon etc. instead
 // of MNO_SW_DEFAULT.
@@ -190,7 +180,7 @@ void setup()
 
   serialWait(); // Wait for the user to press a key (send any serial character)
 
-  assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
+  //assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
 
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
@@ -229,7 +219,7 @@ void setup()
     // Set MNO to either Verizon, T-Mobile, AT&T, Telstra, etc.
     // This will narrow the operator options during our scan later
     SERIAL_PORT.println(F("Setting mobile-network operator"));
-    if (assetTracker.setNetwork(MOBILE_NETWORK_OPERATOR))
+    if (assetTracker.setNetworkProfile(MOBILE_NETWORK_OPERATOR))
     {
       SERIAL_PORT.print(F("Set mobile network operator to "));
       SERIAL_PORT.println(MOBILE_NETWORK_STRINGS[convertOperatorNumber(MOBILE_NETWORK_OPERATOR)] + "\r\n");
@@ -240,18 +230,6 @@ void setup()
       while (1) ;
     }
     
-    // Set the APN -- Access Point Name -- e.g. "hologram"
-    SERIAL_PORT.println(F("Setting APN..."));
-    if (assetTracker.setAPN(APN) == SARA_R5_SUCCESS)
-    {
-      SERIAL_PORT.println(F("APN successfully set.\r\n"));
-    }
-    else
-    {
-      SERIAL_PORT.println(F("Error setting APN. Try cycling the power. Freezing..."));
-      while (1) ;
-    }
-
     // Wait for user to press button before initiating network scan.
     SERIAL_PORT.println(F("Press any key scan for networks.."));
     serialWait();
@@ -266,25 +244,41 @@ void setup()
       // Pretty-print operators we found:
       SERIAL_PORT.println("Found " + String(opsAvailable) + " operators:");
       printOperators(ops, opsAvailable);
+      SERIAL_PORT.println(String(opsAvailable + 1) + ": use automatic selection");
+      SERIAL_PORT.println();
 
       // Wait until the user presses a key to initiate an operator connection
-      SERIAL_PORT.println("Press 1-" + String(opsAvailable) + " to select an operator.");
+      SERIAL_PORT.println("Press 1-" + String(opsAvailable + 1) + " to select an operator.");
       char c = 0;
       bool selected = false;
       while (!selected) {
         while (!SERIAL_PORT.available()) ;
         c = SERIAL_PORT.read();
         int selection = c - '0';
-        if ((selection >= 1) && (selection <= opsAvailable)) {
+        if ((selection >= 1) && (selection <= (opsAvailable + 1))) {
           selected = true;
           SERIAL_PORT.println("Connecting to option " + String(selection));
-          if (assetTracker.registerOperator(ops[selection - 1]) == SARA_R5_SUCCESS)
+          if (selection == (opsAvailable + 1))
           {
-            SERIAL_PORT.println("Network " + ops[selection - 1].longOp + " registered\r\n");
+            if (assetTracker.automaticOperatorSelection() == SARA_R5_SUCCESS)
+            {
+              SERIAL_PORT.println("Automatic operator selection: successful\r\n");
+            }
+            else
+            {
+              SERIAL_PORT.println(F("Automatic operator selection: error. Reset and try again, or try another network."));
+            }
           }
           else
           {
-            SERIAL_PORT.println(F("Error connecting to operator. Reset and try again, or try another network."));
+            if (assetTracker.registerOperator(ops[selection - 1]) == SARA_R5_SUCCESS)
+            {
+              SERIAL_PORT.println("Network " + ops[selection - 1].longOp + " registered\r\n");
+            }
+            else
+            {
+              SERIAL_PORT.println(F("Error connecting to operator. Reset and try again, or try another network."));
+            }
           }
         }
       }
@@ -320,11 +314,20 @@ void printInfo(void) {
   String currentOperator = "";
 
   SERIAL_PORT.println(F("Connection info:"));
-  // APN Connection info: APN name and IP
-  if (assetTracker.getAPN(&currentApn, &ip) == SARA_R5_SUCCESS) {
-    SERIAL_PORT.println("APN: " + String(currentApn));
-    SERIAL_PORT.print("IP: ");
-    SERIAL_PORT.println(ip);
+  SERIAL_PORT.println(F("Context ID:\tAPN Name:\tIP Address:"));
+  for (int cid = 0; cid < SARA_R5_NUM_PDP_CONTEXT_IDENTIFIERS; cid++)
+  {
+    String apn = "";
+    IPAddress ip(0, 0, 0, 0);
+    assetTracker.getAPN(cid, &apn, &ip);
+    if (apn.length() > 0)
+    {
+      SERIAL_PORT.print(cid);
+      SERIAL_PORT.print(F("\t"));
+      SERIAL_PORT.print(apn);
+      SERIAL_PORT.print(F("\t"));
+      SERIAL_PORT.println(ip);
+    }
   }
 
   // Operator name or number

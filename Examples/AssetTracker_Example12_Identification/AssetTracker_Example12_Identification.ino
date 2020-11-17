@@ -102,7 +102,7 @@ void setup()
   while (!SERIAL_PORT.available()) // Wait for the user to press a key (send any serial character)
     ;
 
-  assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
+  //assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
 
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
@@ -131,10 +131,11 @@ void setup()
   Serial.println("Capabilities:        " + String(assetTracker.getCapabilities()));
 
   // Set a callback to return the SIM state once requested
-  assetTracker.setSIMstateReadCallback(&processSIMstate);
-  // Now enable SIM state reporting (for states 0 to 6)
+  assetTracker.setSIMstateReportCallback(&processSIMstate);
+  // Now enable SIM state reporting for states 0 to 6 (by setting the reporting mode LSb)
   if (assetTracker.setSIMstateReportingMode(1) == SARA_R5_SUCCESS)
-    Serial.println("SIM state reports requested...");   
+    Serial.println("SIM state reports requested...");
+  // You can disable the SIM staus reports again by calling assetTracker.setSIMstateReportingMode(0)
 }
 
 void loop()

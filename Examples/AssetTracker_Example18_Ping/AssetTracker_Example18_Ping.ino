@@ -3,12 +3,12 @@
   MicroMod Asset Tracker Example
   ==============================
 
-  Send SMS
+  Ping
 
   Written by: Paul Clark
-  Date: October 30th 2020
+  Date: November 17th 2020
 
-  This example demonstrates how to send SMS messages using the SARA.
+  This example uses the SARA's mobile data connection to ping a server.
 
   The pins and ports are defined in AssetTrackerPins.ino.
 
@@ -39,6 +39,10 @@
 
 */
 
+#include <IPAddress.h>
+
+// SARA-R5
+
 #include "AssetTrackerPins.h" // Include the Asset Tracker pin and port definitions
 
 #define SERIAL_PORT Serial // This is the console serial port - change this if required
@@ -47,6 +51,34 @@
 
 // Create a SARA_R5 object to use throughout the sketch. Pass it the power pin number.
 SARA_R5 assetTracker(SARA_PWR);
+
+String pingMe = ""; // The name of the server we are going to ping
+
+// processPingResult is provided to the SARA-R5 library via a 
+// callback setter -- setPingCallback. (See the end of setup())
+void processPingResult(int retry, int p_size, String remote_hostname, IPAddress ip, int ttl, long rtt)
+{
+  Serial.println();
+  Serial.print(F("Ping Result:  Retry #:"));
+  Serial.print(retry);
+  Serial.print(F("  Ping Size (Bytes):"));
+  Serial.print(p_size);
+  Serial.print(F("  Remote Host:\""));
+  Serial.print(remote_hostname);
+  Serial.print(F("\"  IP Address:\""));
+  Serial.print(String(ip[0]));
+  Serial.print(F("."));
+  Serial.print(String(ip[1]));
+  Serial.print(F("."));
+  Serial.print(String(ip[2]));
+  Serial.print(F("."));
+  Serial.print(String(ip[3]));
+  Serial.print(F("\"  Time To Live (hops):"));
+  Serial.print(ttl);
+  Serial.print(F("  Round Trip (ms):"));
+  Serial.print(rtt);
+  Serial.println();
+}
 
 void setup()
 {
@@ -101,62 +133,65 @@ void setup()
       ; // Do nothing more
   }
 
+  // Deactivate the profile - in case one is already active
+  if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_DEACTIVATE) != SARA_R5_SUCCESS)
+  {
+    SERIAL_PORT.println(F("Warning: performPDPaction (deactivate profile) failed. Probably because no profile was active."));
+  }
+
+  // Load the profile from NVM
+  if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_LOAD) != SARA_R5_SUCCESS)
+  {
+    SERIAL_PORT.println(F("performPDPaction (load from NVM) failed! Freezing..."));
+    while (1)
+      ; // Do nothing more
+  }
+
+  // Activate the profile
+  if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_ACTIVATE) != SARA_R5_SUCCESS)
+  {
+    SERIAL_PORT.println(F("performPDPaction (activate profile) failed! Freezing..."));
+    while (1)
+      ; // Do nothing more
+  }
+
   SERIAL_PORT.println();
   SERIAL_PORT.println(F("*** Set the Serial Monitor line ending to Newline ***"));
+
+  SERIAL_PORT.println();
+  SERIAL_PORT.println(F("Enter the name of the server you want to ping (followed by LF / Newline): "));
+
+  // Set a callback to process the Ping result
+  assetTracker.setPingCallback(&processPingResult);
 }
 
 void loop()
 {
-  String destinationNumber = "";
-  String message = "";
-  boolean keepGoing = true;
-  
-  SERIAL_PORT.println();
-  SERIAL_PORT.println(F("Enter the destination number (followed by LF): "));
-  
-  while (keepGoing)
+  if (SERIAL_PORT.available())
   {
-    if (SERIAL_PORT.available())
+    char c = SERIAL_PORT.read();
+    if (c == '\n')
     {
-      char c = SERIAL_PORT.read();
-      if (c == '\n')
-      {
-        keepGoing = false; // Stop if we receive a newline
-      }
-      else
-      {
-        destinationNumber += c; // Add serial characters to the destination number
-      }
+      // Newline received so let's do that ping!
+      assetTracker.ping(pingMe); // Use the default parameters
+      
+      // Use custom parameters
+      //int retries = 4; // number of retries
+      //int p_size = 32; // packet size (bytes)
+      //unsigned long timeout = 5000; // timeout (ms)
+      //int ttl = 32; // Time To Live
+      //assetTracker.ping(pingMe, retries, p_size, timeout, ttl);
+      
+      pingMe = ""; // Clear the server name for the next try
+    }
+    else
+    {
+      // Add serial characters to the server address
+      pingMe += c;
     }
   }
   
-  keepGoing = true;
-  SERIAL_PORT.println();
-  SERIAL_PORT.println(F("Enter the message (followed by LF): "));
-  
-  while (keepGoing)
-  {
-    if (SERIAL_PORT.available())
-    {
-      char c = SERIAL_PORT.read();
-      if (c == '\n')
-      {
-        keepGoing = false; // Stop if we receive a newline
-      }
-      else
-      {
-        message += c; // Add serial characters to the destination number
-      }
-    }
-  }
-
-  // Once we receive a newline, send the text.
-  SERIAL_PORT.println("Sending: \"" + message + "\" to " + destinationNumber);
-  // Call assetTracker.sendSMS(String number, String message) to send an SMS message.
-  if (assetTracker.sendSMS(destinationNumber, message) == SARA_R5_SUCCESS)
-  {
-    SERIAL_PORT.println(F("sendSMS was successful"));
-  }
+  assetTracker.poll(); // Keep processing data from the SARA so we can catch the Ping result
 }
 
 void serialWait()

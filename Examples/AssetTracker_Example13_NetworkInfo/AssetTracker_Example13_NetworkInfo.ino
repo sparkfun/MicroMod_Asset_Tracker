@@ -84,16 +84,9 @@ String registrationString[] =
 // MNO_STD_EUROPE
 // MNO_STD_EU_NOEPCO
 
+// If you are based in Europe, you will (probably) need to select MNO_STD_EUROPE
+
 const mobile_network_operator_t MOBILE_NETWORK_OPERATOR = MNO_GLOBAL;
-
-// APN -- Access Point Name. Gateway between GPRS MNO
-// and another computer network. E.g. "hologram
-//const String APN = "hologram";
-
-// The APN can be omitted: this is the so-called "blank APN" setting that may be suggested by
-// network operators (e.g. to roaming devices); in this case the APN string is not included in
-// the message sent to the network.
-const String APN = "";
 
 void setup()
 {
@@ -117,7 +110,7 @@ void setup()
   while (!SERIAL_PORT.available()) // Wait for the user to press a key (send any serial character)
     ;
 
-  assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
+  //assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
 
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
@@ -134,18 +127,13 @@ void setup()
   }
   SERIAL_PORT.println();
 
-  if (!assetTracker.setNetwork(MOBILE_NETWORK_OPERATOR))
+  if (!assetTracker.setNetworkProfile(MOBILE_NETWORK_OPERATOR))
   {
     SERIAL_PORT.println(F("Error setting network. Try cycling the power."));
     while (1) ;
   }
   
-  if (assetTracker.setAPN(APN) == SARA_R5_SUCCESS)
-  {
-    SERIAL_PORT.println(F("APN successfully set."));
-  }
-  
-  SERIAL_PORT.println(F("Network set. Ready to go!"));
+  SERIAL_PORT.println(F("Network profile set. Ready to go!"));
   
   // RSSI: Received signal strength:
   SERIAL_PORT.println("RSSI: " + String(assetTracker.rssi()));
@@ -155,8 +143,29 @@ void setup()
   {
     SERIAL_PORT.println("Network registration: " + registrationString[regStatus]);
   }
+
+  // Print the Context IDs, Access Point Names and IP Addresses
+  SERIAL_PORT.println(F("Available PDP (Packet Data Protocol) APNs (Access Point Names) and IP Addresses:"));
+  SERIAL_PORT.println(F("Context ID:\tAPN Name:\tIP Address:"));
+  for (int cid = 0; cid < SARA_R5_NUM_PDP_CONTEXT_IDENTIFIERS; cid++)
+  {
+    String apn = "";
+    IPAddress ip(0, 0, 0, 0);
+    assetTracker.getAPN(cid, &apn, &ip);
+    if (apn.length() > 0)
+    {
+      SERIAL_PORT.print(cid);
+      SERIAL_PORT.print(F("\t"));
+      SERIAL_PORT.print(apn);
+      SERIAL_PORT.print(F("\t"));
+      SERIAL_PORT.println(ip);
+    }
+  }
+
+  SERIAL_PORT.println();
   
-  if (regStatus > 0) {
+  if (regStatus > 0)
+  {
     SERIAL_PORT.println(F("All set. Go to the next example!"));
   }
 }
