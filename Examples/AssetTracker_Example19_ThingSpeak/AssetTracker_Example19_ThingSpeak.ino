@@ -48,7 +48,7 @@
 
 #include <IPAddress.h>
 
-// ThingSpeak via HTTP POST
+// ThingSpeak via HTTP POST / GET
 
 String myWriteAPIKey = "PFIOEXW1VF21T7O6"; // Change this to your API key
 
@@ -93,7 +93,7 @@ void processHTTPcommandResult(int profile, int command, int result)
   int error_class;
   int error_code;
   assetTracker.getHTTPprotocolError(0, &error_class, &error_code);
-  SERIAL_PORT.print(F("Most recent HTTP POST protocol error:  class: "));
+  SERIAL_PORT.print(F("Most recent HTTP protocol error:  class: "));
   SERIAL_PORT.print(error_class);
   SERIAL_PORT.print(F("  code: "));
   SERIAL_PORT.print(error_code);
@@ -104,7 +104,7 @@ void processHTTPcommandResult(int profile, int command, int result)
   // Read and print the HTTP POST result
   String postResult = "";
   assetTracker.getFileContents("post_response.txt", &postResult);
-  SERIAL_PORT.print(F("HTTP POST result was: "));
+  SERIAL_PORT.print(F("HTTP command result was: "));
   SERIAL_PORT.println(postResult);
 
   SERIAL_PORT.println();
@@ -196,7 +196,7 @@ void setup()
     SERIAL_PORT.println(F("Warning: performPDPaction (deactivate profile) failed. Probably because no profile was active."));
   }
 
-  // Load the PSD profile from NVM
+  // Load the PSD profile from NVM - these were saved by a previous example
   if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_LOAD) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("performPDPaction (load from NVM) failed! Freezing..."));
@@ -219,7 +219,7 @@ void setup()
   assetTracker.setHTTPserverName(0, serverName);
   
   // Use HTTPS
-  assetTracker.setHTTPsecure(0, false);
+  assetTracker.setHTTPsecure(0, false); // Setting this to true causes the POST / GET to fail. Not sure why...
 
   // Set a callback to process the HTTP command result
   assetTracker.setHTTPCommandCallback(&processHTTPcommandResult);
@@ -232,7 +232,7 @@ void loop()
     myICM.getAGMT(); // Read the Accel, Gyr, Mag and Temperature values
     float temperature = myICM.temp(); // Extract the temperature (Degrees C)
 
-    // Data to send with HTTP POST
+    // Send data using HTTP POST
     String httpRequestData = "api_key=" + myWriteAPIKey + "&field1=" + String(temperature);
 
     SERIAL_PORT.print(F("POSTing a temperature of "));
@@ -242,11 +242,11 @@ void loop()
     // Send HTTP POST request to /update. The reponse will be written to post_response.txt in the SARA's file system
     assetTracker.sendHTTPPOSTdata(0, "/update", "post_response.txt", httpRequestData, SARA_R5_HTTP_CONTENT_APPLICATION_X_WWW);
 
-//    // Data to send with HTTP GET
-//    String path = "/update?api_key=" + myWriteAPIKey + "&field1=" + String((int)temperature);
+//    // Send data using HTTP GET
+//    String path = "/update?api_key=" + myWriteAPIKey + "&field1=" + String(temperature);
 //
 //    SERIAL_PORT.print(F("Send a temperature of "));
-//    SERIAL_PORT.print(String((int)temperature));
+//    SERIAL_PORT.print(String(temperature));
 //    SERIAL_PORT.println(F(" to ThingSpeak using HTTP GET"));
 //          
 //    // Send HTTP POST request to /update. The reponse will be written to post_response.txt in the SARA's file system

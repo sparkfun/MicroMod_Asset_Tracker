@@ -10,10 +10,10 @@
 
   This example demonstrates how to configure Packet Switched Data on the SARA-R5.
 
-  The earlier examples ley you configure the network profile and select an operator.
+  The earlier examples let you configure the network profile and select an operator.
   The default operator - defined in your SIM - will be allocated to "Context ID 1".
   This example defines a Packet Switched Data Profile ID, based on the selected Context ID, and then activates it.
-  The profile parameters are also saved to NVM.
+  The profile parameters are also saved to NVM so they can be used by the next examples.
   The only complicated bit is that - strictly - we need to disconnect from the network first in order to find out what
   the defined IP type is for the chosen Context ID - as opposed to what is granted by the network. However, we'll
   take a guess that it is the default (IPv4v6). You can change this if required by editing the call to setPDPconfiguration.
@@ -129,7 +129,7 @@ void setup()
       ; // Do nothing more
   }
 
-  int minCID = SARA_R5_NUM_PDP_CONTEXT_IDENTIFIERS;
+  int minCID = SARA_R5_NUM_PDP_CONTEXT_IDENTIFIERS; // Keep a record of the highest and lowest CIDs
   int maxCID = 0;
 
   SERIAL_PORT.println(F("The available Context IDs are:"));
@@ -218,13 +218,13 @@ void setup()
       ; // Do nothing more
   }
 
-  for (int i = 0; i < 100; i++) // Wait for up to a second for the PSD Action USR to arrive
+  for (int i = 0; i < 100; i++) // Wait for up to a second for the PSD Action URC to arrive
   {
     assetTracker.poll(); // Keep processing data from the SARA so we can process the PSD Action
     delay(10);
   }
 
-  // Save the profile to NVM - so we can load them in the later examples
+  // Save the profile to NVM - so we can load it again in the later examples
   if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_STORE) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("performPDPaction (save to NVM) failed! Freezing..."));
@@ -236,7 +236,7 @@ void setup()
 
 void loop()
 {
-  assetTracker.poll(); // Keep processing data from the SARA so we can process the PSD Action
+  assetTracker.poll(); // Keep processing data from the SARA so we can process URCs from the PSD Action
 }
 
 void serialWait()

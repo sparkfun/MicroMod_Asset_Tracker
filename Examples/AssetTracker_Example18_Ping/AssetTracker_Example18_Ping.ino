@@ -139,7 +139,7 @@ void setup()
     SERIAL_PORT.println(F("Warning: performPDPaction (deactivate profile) failed. Probably because no profile was active."));
   }
 
-  // Load the profile from NVM
+  // Load the profile from NVM - these were saved by a previous example
   if (assetTracker.performPDPaction(0, SARA_R5_PSD_ACTION_LOAD) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("performPDPaction (load from NVM) failed! Freezing..."));
