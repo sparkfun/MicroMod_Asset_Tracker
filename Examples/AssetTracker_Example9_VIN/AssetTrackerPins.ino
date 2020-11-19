@@ -119,6 +119,8 @@ float readVIN()
   vin *= 3.3 / 1023.0; // nRF52840 (Arduino NANO 33 BLE) is 3.3V and defaults to 10-bit
 #elif defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD)
   vin *= 2.0 / 1023.0; // Artemis (APOLLO3) is 2.0V and defaults to 10-bit
+  vin *= 2.5 / 1.5; // Artemis PB has a built-in 150k/100k divider
+  vin *= 1.41; // Correction factor to compensate for the divider resistance
 #elif defined(ARDUINO_ARCH_ESP32)
   vin *= 3.3 / 4095.0; // ESP32 is 3.3V and defaults to 12-bit
 #elif defined(ARDUINO_ARCH_SAMD)

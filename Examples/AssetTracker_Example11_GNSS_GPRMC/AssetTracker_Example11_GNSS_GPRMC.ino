@@ -55,7 +55,7 @@ SpeedData spd;
 ClockData clk;
 boolean valid;
 
-#define GPS_POLL_RATE 5000 // Read GPS every 2 seconds
+#define GPS_POLL_RATE 5000 // Read GPS every 5 seconds
 unsigned long lastGpsPoll = 0;
 
 void setup()

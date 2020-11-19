@@ -54,18 +54,6 @@
 
 // This is hopefully a temporary fix for the SAMD51 pins
 #if defined(ARDUINO_ARCH_SAMD)
-#define D0 0
-#define G0 2
-#define G1 3
-#define G2 4
-#define G3 5
-#define G4 6
-#define G5 7
-#define G6 8
-#define G7 9
-#define G9 11
-#define I2CINT 12
-#define CS 48
 #define BATTVIN3 A4
 #endif
 

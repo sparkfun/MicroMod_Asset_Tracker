@@ -3,7 +3,7 @@
   MicroMod Asset Tracker Example
   ==============================
 
-  Network Info
+  Register Operator
 
   Written by: Paul Clark
   Date: October 30th 2020
