@@ -4,7 +4,7 @@
   ===================================================
 
   Written by: Paul Clark
-  Date: October 30th 2020
+  Date: Novenber 20th 2020
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -44,8 +44,6 @@ void initializeAssetTrackerPins()
   if (SARA_DSR >= 0) pinMode(SARA_DSR, INPUT);
 
   if (SARA_ON >= 0) pinMode(SARA_ON, INPUT);
-
-  if (SARA_ON_ALT >= 0) pinMode(SARA_ON_ALT, INPUT);
 
   pinMode(IMU_INT, INPUT);
 
@@ -100,14 +98,16 @@ void enableIMUPower()
 // Disable power for the GNSS active antenna
 void disableGNSSAntennaPower()
 {
-  pinMode(ANT_PWR_EN, OUTPUT); // Define the pinMode here in case a sleep function has disabled it
-  digitalWrite(ANT_PWR_EN, LOW);
+  // On v11 of the Asset Tracker, the antenna power is controlled by SARA GPIO2.
+  // We need to pull GPIO2 (Pin 23) low to disable the power.
+  assetTracker.setGpioMode(assetTracker.GPIO2, assetTracker.GPIO_OUTPUT, 0); // Disable
 }
 // Enable power for the GNSS active antenna
 void enableGNSSAntennaPower()
 {
-  pinMode(ANT_PWR_EN, OUTPUT); // Define the pinMode here in case a sleep function has disabled it
-  digitalWrite(ANT_PWR_EN, HIGH);
+  // On v11 of the Asset Tracker, the antenna power is controlled by SARA GPIO2.
+  // We need to pull GPIO2 (Pin 23) high to enable the power.
+  assetTracker.setGpioMode(assetTracker.GPIO2, assetTracker.GPIO_OUTPUT, 1); // Enable
 }
 
 // Read VIN / 3
