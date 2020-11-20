@@ -24845,6 +24845,39 @@ It has a reduced top mask to make it harder to install upside-down.</description
 </device>
 </devices>
 </deviceset>
+<deviceset name="470OHM" prefix="R" uservalue="yes">
+<description>&lt;h3&gt;470Ω resistor&lt;/h3&gt;
+&lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-0603-1/10W-1%" package="0603">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="RES-07869"/>
+<attribute name="VALUE" value="470"/>
+</technology>
+</technologies>
+</device>
+<device name="-0402-1/16W-5%" package="0402">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="RES-13829" constant="no"/>
+<attribute name="VALUE" value="470" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="1KOHM" prefix="R">
 <description>&lt;h3&gt;1kΩ resistor&lt;/h3&gt;
 &lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
@@ -33576,7 +33609,7 @@ This is a footprint for an edge mount RF antenna. Works pretty well with SMA typ
 <part name="Q3" library="SparkFun-DiscreteSemi" deviceset="MOSFET-NCH" device="-2N7002PW" value="310mA/60V/1.6Ω"/>
 <part name="GND66" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="R34" library="SparkFun-Resistors" deviceset="1KOHM" device="-0603-1/10W-1%" value="1k"/>
-<part name="R35" library="SparkFun-Resistors" deviceset="1KOHM" device="-0603-1/10W-1%" value="1k"/>
+<part name="R35" library="SparkFun-Resistors" deviceset="470OHM" device="-0603-1/10W-1%" value="470"/>
 <part name="D13" library="SparkFun-LED" deviceset="LED-BLUE" device="0603" value="BLUE"/>
 <part name="SUPPLY51" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="R36" library="SparkFun-Resistors" deviceset="0OHM" device="-0603-1/10W" value="0"/>
@@ -33623,14 +33656,11 @@ This is a footprint for an edge mount RF antenna. Works pretty well with SMA typ
 <part name="JP10" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
 <part name="JP11" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
 <part name="JP12" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP13" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP14" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP15" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP16" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP17" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="D9" library="SparkFun-DiscreteSemi" deviceset="DIODE-ZENER" device="-MM3Z3V3T1G" value="3.3V"/>
-<part name="GND40" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="SUPPLY32" library="SparkFun-PowerSymbols" deviceset="VIN" device=""/>
+<part name="JP13" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="JP14" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="JP15" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="JP16" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="JP17" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="GND67" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="S3" library="SparkFun-Switches" deviceset="MOMENTARY-SWITCH-SPST" device="-SMD-5.2-TALL-REDUNDANT" value="SARA_PWR"/>
 <part name="GND68" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -33647,8 +33677,6 @@ This is a footprint for an edge mount RF antenna. Works pretty well with SMA typ
 <part name="JP20" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
 <part name="R44" library="SparkFun-Resistors" deviceset="100KOHM" device="-0603-1/10W-1%" value="100k"/>
 <part name="SUPPLY54" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
-<part name="JP19" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
-<part name="JP21" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="TP13" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
 <part name="TP22" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
 <part name="TP23" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3" value="TEST-POINT3"/>
@@ -33679,6 +33707,15 @@ This is a footprint for an edge mount RF antenna. Works pretty well with SMA typ
 <part name="GND43" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND76" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="VIN/3" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
+<part name="JP9" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
+<part name="SUPPLY14" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
+<part name="Q8" library="SparkFun-DiscreteSemi" deviceset="MOSFET-NCH" device="-2N7002PW" value="310mA/60V/1.6Ω"/>
+<part name="R13" library="SparkFun-Resistors" deviceset="1KOHM" device="-0603-1/10W-1%" value="1k"/>
+<part name="GND40" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="R45" library="SparkFun-Resistors" deviceset="100KOHM" device="-0603-1/10W-1%" value="100k"/>
+<part name="SUPPLY28" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
+<part name="Q9" library="SparkFun-DiscreteSemi" deviceset="MOSFET-NCH" device="-2N7002PW" value="310mA/60V/1.6Ω"/>
+<part name="GND77" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -34468,12 +34505,6 @@ with the 3.3V regulator.</text>
 <instance part="JP20" gate="G$1" x="68.58" y="60.96" smashed="yes" rot="R90">
 <attribute name="NAME" x="68.199" y="53.848" size="1.778" layer="95" font="vector" rot="R90"/>
 </instance>
-<instance part="JP19" gate="G$1" x="137.16" y="20.32" smashed="yes">
-<attribute name="NAME" x="130.048" y="20.701" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="JP21" gate="G$1" x="137.16" y="22.86" smashed="yes">
-<attribute name="NAME" x="130.048" y="23.241" size="1.778" layer="95" font="vector"/>
-</instance>
 <instance part="TP23" gate="G$1" x="300.99" y="260.35" smashed="yes" rot="R90">
 <attribute name="NAME" x="299.72" y="257.81" size="1.778" layer="95" font="vector" rot="R90"/>
 </instance>
@@ -34509,6 +34540,9 @@ with the 3.3V regulator.</text>
 </instance>
 <instance part="VIN/3" gate="G$1" x="10.16" y="256.54" smashed="yes" rot="R90">
 <attribute name="NAME" x="7.874" y="253.238" size="1.778" layer="95" font="vector" rot="R90"/>
+</instance>
+<instance part="JP9" gate="G$1" x="73.66" y="40.64" smashed="yes">
+<attribute name="NAME" x="67.818" y="41.021" size="1.778" layer="95" font="vector"/>
 </instance>
 </instances>
 <busses>
@@ -35174,7 +35208,9 @@ with the 3.3V regulator.</text>
 <net name="I2C_SCL" class="0">
 <segment>
 <wire x1="81.28" y1="45.72" x2="78.74" y2="45.72" width="0.1524" layer="91"/>
-<label x="78.74" y="45.72" size="1.27" layer="95" rot="MR0" xref="yes"/>
+<wire x1="78.74" y1="45.72" x2="78.74" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="48.26" x2="73.66" y2="48.26" width="0.1524" layer="91"/>
+<label x="73.66" y="48.26" size="1.27" layer="95" rot="MR0" xref="yes"/>
 <pinref part="J4" gate="J1" pin="I2C_SCL"/>
 </segment>
 <segment>
@@ -35194,8 +35230,10 @@ with the 3.3V regulator.</text>
 </net>
 <net name="I2C_SDA" class="0">
 <segment>
-<wire x1="81.28" y1="43.18" x2="78.74" y2="43.18" width="0.1524" layer="91"/>
-<label x="78.74" y="43.18" size="1.27" layer="95" rot="MR0" xref="yes"/>
+<wire x1="81.28" y1="43.18" x2="76.2" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="43.18" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="45.72" x2="73.66" y2="45.72" width="0.1524" layer="91"/>
+<label x="73.66" y="45.72" size="1.27" layer="95" rot="MR0" xref="yes"/>
 <pinref part="J4" gate="J1" pin="I2C_SDA"/>
 </segment>
 <segment>
@@ -35720,9 +35758,9 @@ with the 3.3V regulator.</text>
 <wire x1="231.14" y1="76.2" x2="236.22" y2="76.2" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="81.28" y1="40.64" x2="78.74" y2="40.64" width="0.1524" layer="91"/>
-<label x="78.74" y="40.64" size="1.27" layer="95" rot="MR0" xref="yes"/>
-<pinref part="J4" gate="J1" pin="I2C_!INT!"/>
+<label x="66.04" y="40.64" size="1.27" layer="95" rot="MR0" xref="yes"/>
+<pinref part="JP9" gate="G$1" pin="1"/>
+<wire x1="68.58" y1="40.64" x2="66.04" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="ICM-20948-LV_!CS!" class="0">
@@ -36010,13 +36048,6 @@ with the 3.3V regulator.</text>
 <pinref part="U1" gate="G$2" pin="ANT_GNSS"/>
 <wire x1="134.62" y1="137.16" x2="144.78" y2="137.16" width="0.1524" layer="91"/>
 <label x="144.78" y="137.16" size="1.27" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="ANT_GNSS_PWR_EN" class="0">
-<segment>
-<label x="144.78" y="30.48" size="1.27" layer="95" xref="yes"/>
-<pinref part="JP16" gate="G$1" pin="2"/>
-<wire x1="142.24" y1="30.48" x2="144.78" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SARA_SDA_1.8V" class="0">
@@ -36372,28 +36403,9 @@ with the 3.3V regulator.</text>
 </net>
 <net name="SARA_!ON!" class="0">
 <segment>
-<wire x1="144.78" y1="22.86" x2="147.32" y2="22.86" width="0.1524" layer="91"/>
-<label x="147.32" y="22.86" size="1.27" layer="95" xref="yes"/>
-<pinref part="JP19" gate="G$1" pin="2"/>
-<wire x1="142.24" y1="20.32" x2="144.78" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="144.78" y1="20.32" x2="144.78" y2="22.86" width="0.1524" layer="91"/>
-<pinref part="JP21" gate="G$1" pin="2"/>
-<wire x1="142.24" y1="22.86" x2="144.78" y2="22.86" width="0.1524" layer="91"/>
-<junction x="144.78" y="22.86"/>
-</segment>
-</net>
-<net name="G10" class="0">
-<segment>
-<pinref part="J4" gate="J1" pin="G10/ADC_D+/CAM_VSYNC"/>
-<pinref part="JP19" gate="G$1" pin="1"/>
-<wire x1="127" y1="20.32" x2="132.08" y2="20.32" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="G9" class="0">
-<segment>
-<pinref part="J4" gate="J1" pin="G9/ADC_D-/CAM_HSYNC"/>
-<pinref part="JP21" gate="G$1" pin="1"/>
-<wire x1="127" y1="22.86" x2="132.08" y2="22.86" width="0.1524" layer="91"/>
+<label x="144.78" y="30.48" size="1.27" layer="95" xref="yes"/>
+<pinref part="JP16" gate="G$1" pin="2"/>
+<wire x1="142.24" y1="30.48" x2="144.78" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -36402,6 +36414,20 @@ with the 3.3V regulator.</text>
 <pinref part="R10" gate="G$1" pin="2"/>
 <wire x1="10.16" y1="251.46" x2="10.16" y2="248.92" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="248.92" x2="12.7" y2="248.92" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="J4" gate="J1" pin="I2C_!INT!"/>
+<pinref part="JP9" gate="G$1" pin="2"/>
+<wire x1="81.28" y1="40.64" x2="78.74" y2="40.64" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="ANT_GNSS_PWR_EN" class="0">
+<segment>
+<label x="101.6" y="162.56" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="U1" gate="G$2" pin="GPIO2"/>
+<wire x1="104.14" y1="162.56" x2="101.6" y2="162.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
@@ -36466,6 +36492,12 @@ Iq = 50µA </text>
 <text x="235.839" y="146.431" size="2.54" layer="97" font="vector" align="center">Change jumper to reverse
 the direction of DSR for
 2 UART communication</text>
+<wire x1="210.82" y1="68.58" x2="78.74" y2="68.58" width="0.2032" layer="97" style="longdash"/>
+<wire x1="210.82" y1="134.62" x2="210.82" y2="68.58" width="0.2032" layer="97" style="longdash"/>
+<text x="142.494" y="126.746" size="2.54" layer="94" font="vector" align="center">GNSS Active Antenna Power Enable</text>
+<text x="83.566" y="73.152" size="1.27" layer="97">ANT_GNSS_PWR_EN is 1.8V (from SARA GPIO2).
+To minimise power draw when the SARA is OFF,
+ANT_REG_EN needs to be low when ANT_GNSS_PWR_EN is low.</text>
 </plain>
 <instances>
 <instance part="FRAME2" gate="G$1" x="0" y="0" smashed="yes"/>
@@ -36561,9 +36593,9 @@ the direction of DSR for
 <instance part="GND54" gate="1" x="190.5" y="218.44" smashed="yes">
 <attribute name="VALUE" x="190.5" y="218.186" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="R25" gate="G$1" x="127" y="236.22" smashed="yes" rot="R270">
-<attribute name="NAME" x="128.524" y="236.22" size="1.778" layer="95" font="vector" rot="R270" align="bottom-center"/>
-<attribute name="VALUE" x="125.476" y="236.22" size="1.778" layer="96" font="vector" rot="R270" align="top-center"/>
+<instance part="R25" gate="G$1" x="139.7" y="106.68" smashed="yes" rot="R270">
+<attribute name="NAME" x="141.224" y="106.68" size="1.778" layer="95" font="vector" rot="R270" align="bottom-center"/>
+<attribute name="VALUE" x="138.176" y="106.68" size="1.778" layer="96" font="vector" rot="R270" align="top-center"/>
 </instance>
 <instance part="D11" gate="G$1" x="177.8" y="256.54" smashed="yes" rot="R270">
 <attribute name="NAME" x="180.594" y="259.08" size="1.778" layer="95" font="vector" rot="R270"/>
@@ -36820,16 +36852,6 @@ the direction of DSR for
 <instance part="GND30" gate="1" x="330.2" y="177.8" smashed="yes">
 <attribute name="VALUE" x="330.2" y="177.546" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="D9" gate="G$1" x="127" y="223.52" smashed="yes" rot="R90">
-<attribute name="NAME" x="124.968" y="220.98" size="1.778" layer="95" font="vector" rot="R90"/>
-<attribute name="VALUE" x="129.032" y="220.98" size="1.778" layer="96" font="vector" rot="R90" align="top-left"/>
-</instance>
-<instance part="GND40" gate="1" x="127" y="215.9" smashed="yes">
-<attribute name="VALUE" x="127" y="215.646" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="SUPPLY32" gate="G$1" x="127" y="243.84" smashed="yes">
-<attribute name="VALUE" x="127" y="246.634" size="1.778" layer="96" align="bottom-center"/>
-</instance>
 <instance part="GND67" gate="1" x="355.6" y="205.74" smashed="yes">
 <attribute name="VALUE" x="355.6" y="205.486" size="1.778" layer="96" align="top-center"/>
 </instance>
@@ -36924,6 +36946,34 @@ the direction of DSR for
 </instance>
 <instance part="GND76" gate="1" x="53.34" y="88.9" smashed="yes">
 <attribute name="VALUE" x="53.34" y="88.646" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="SUPPLY14" gate="G$1" x="139.7" y="114.3" smashed="yes">
+<attribute name="VALUE" x="139.7" y="117.094" size="1.778" layer="96" font="vector" align="bottom-center"/>
+</instance>
+<instance part="Q8" gate="NMOS" x="137.16" y="91.44" smashed="yes">
+<attribute name="NAME" x="129.54" y="91.44" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="116.84" y="96.52" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="R13" gate="G$1" x="124.46" y="88.9" smashed="yes">
+<attribute name="NAME" x="124.46" y="90.424" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="124.46" y="87.376" size="1.778" layer="96" font="vector" align="top-center"/>
+</instance>
+<instance part="GND40" gate="1" x="139.7" y="81.28" smashed="yes">
+<attribute name="VALUE" x="139.7" y="81.026" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="R45" gate="G$1" x="154.94" y="106.68" smashed="yes" rot="R270">
+<attribute name="NAME" x="156.464" y="106.68" size="1.778" layer="95" font="vector" rot="R270" align="bottom-center"/>
+<attribute name="VALUE" x="153.416" y="106.68" size="1.778" layer="96" font="vector" rot="R270" align="top-center"/>
+</instance>
+<instance part="SUPPLY28" gate="G$1" x="154.94" y="114.3" smashed="yes">
+<attribute name="VALUE" x="154.94" y="117.094" size="1.778" layer="96" font="vector" align="bottom-center"/>
+</instance>
+<instance part="Q9" gate="NMOS" x="152.4" y="91.44" smashed="yes">
+<attribute name="NAME" x="157.48" y="88.9" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="157.48" y="91.44" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="GND77" gate="1" x="154.94" y="81.28" smashed="yes">
+<attribute name="VALUE" x="154.94" y="81.026" size="1.778" layer="96" align="top-center"/>
 </instance>
 </instances>
 <busses>
@@ -37034,11 +37084,6 @@ the direction of DSR for
 <pinref part="GND30" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="GND40" gate="1" pin="GND"/>
-<pinref part="D9" gate="G$1" pin="A"/>
-<wire x1="127" y1="218.44" x2="127" y2="220.98" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="GND67" gate="1" pin="GND"/>
 <pinref part="R18" gate="G$1" pin="2"/>
 <wire x1="355.6" y1="208.28" x2="355.6" y2="210.82" width="0.1524" layer="91"/>
@@ -37110,6 +37155,16 @@ the direction of DSR for
 <pinref part="GND76" gate="1" pin="GND"/>
 <wire x1="53.34" y1="93.98" x2="53.34" y2="91.44" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="Q8" gate="NMOS" pin="S"/>
+<pinref part="GND40" gate="1" pin="GND"/>
+<wire x1="139.7" y1="86.36" x2="139.7" y2="83.82" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="Q9" gate="NMOS" pin="S"/>
+<pinref part="GND77" gate="1" pin="GND"/>
+<wire x1="154.94" y1="86.36" x2="154.94" y2="83.82" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="SARA_ANT" class="0">
 <segment>
@@ -37179,11 +37234,6 @@ the direction of DSR for
 <pinref part="SUPPLY10" gate="G$1" pin="VIN"/>
 <wire x1="134.62" y1="233.68" x2="134.62" y2="236.22" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="R25" gate="G$1" pin="1"/>
-<pinref part="SUPPLY32" gate="G$1" pin="VIN"/>
-<wire x1="127" y1="241.3" x2="127" y2="243.84" width="0.1524" layer="91"/>
-</segment>
 </net>
 <net name="N$25" class="0">
 <segment>
@@ -37217,15 +37267,9 @@ the direction of DSR for
 </net>
 <net name="ANT_GNSS_PWR_EN" class="0">
 <segment>
-<pinref part="U3" gate="G$1" pin="EN"/>
-<wire x1="137.16" y1="228.6" x2="127" y2="228.6" width="0.1524" layer="91"/>
-<label x="124.46" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
-<pinref part="R25" gate="G$1" pin="2"/>
-<wire x1="127" y1="228.6" x2="124.46" y2="228.6" width="0.1524" layer="91"/>
-<wire x1="127" y1="231.14" x2="127" y2="228.6" width="0.1524" layer="91"/>
-<junction x="127" y="228.6"/>
-<pinref part="D9" gate="G$1" pin="C"/>
-<wire x1="127" y1="226.06" x2="127" y2="228.6" width="0.1524" layer="91"/>
+<label x="116.84" y="88.9" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="R13" gate="G$1" pin="1"/>
+<wire x1="119.38" y1="88.9" x2="116.84" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCCIO" class="0">
@@ -37356,6 +37400,16 @@ the direction of DSR for
 <wire x1="297.18" y1="175.26" x2="307.34" y2="175.26" width="0.1524" layer="91"/>
 <pinref part="SUPPLY58" gate="G$1" pin="3.3V"/>
 <wire x1="307.34" y1="175.26" x2="307.34" y2="177.8" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R25" gate="G$1" pin="1"/>
+<pinref part="SUPPLY14" gate="G$1" pin="3.3V"/>
+<wire x1="139.7" y1="111.76" x2="139.7" y2="114.3" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R45" gate="G$1" pin="1"/>
+<pinref part="SUPPLY28" gate="G$1" pin="3.3V"/>
+<wire x1="154.94" y1="111.76" x2="154.94" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="TX1" class="0">
@@ -37817,6 +37871,42 @@ the direction of DSR for
 <pinref part="U$132" gate="U1" pin="SDA"/>
 <wire x1="50.8" y1="104.14" x2="53.34" y2="104.14" width="0.1524" layer="91"/>
 <label x="53.34" y="104.14" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="N$40" class="0">
+<segment>
+<pinref part="Q8" gate="NMOS" pin="G"/>
+<pinref part="R13" gate="G$1" pin="2"/>
+<wire x1="132.08" y1="88.9" x2="129.54" y2="88.9" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$42" class="0">
+<segment>
+<pinref part="R25" gate="G$1" pin="2"/>
+<pinref part="Q8" gate="NMOS" pin="D"/>
+<wire x1="139.7" y1="96.52" x2="139.7" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="99.06" x2="139.7" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="99.06" x2="144.78" y2="99.06" width="0.1524" layer="91"/>
+<junction x="139.7" y="99.06"/>
+<wire x1="144.78" y1="99.06" x2="144.78" y2="88.9" width="0.1524" layer="91"/>
+<pinref part="Q9" gate="NMOS" pin="G"/>
+<wire x1="144.78" y1="88.9" x2="147.32" y2="88.9" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="ANT_REG_EN" class="0">
+<segment>
+<pinref part="R45" gate="G$1" pin="2"/>
+<pinref part="Q9" gate="NMOS" pin="D"/>
+<wire x1="154.94" y1="96.52" x2="154.94" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="99.06" x2="154.94" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="99.06" x2="157.48" y2="99.06" width="0.1524" layer="91"/>
+<junction x="154.94" y="99.06"/>
+<label x="157.48" y="99.06" size="1.27" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U3" gate="G$1" pin="EN"/>
+<wire x1="137.16" y1="228.6" x2="134.62" y2="228.6" width="0.1524" layer="91"/>
+<label x="134.62" y="228.6" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>

@@ -4,7 +4,7 @@ number of layers, 4
 soldermask color, Red
 silkscreen color, White
 oz copper, 1oz
-finish, ENIG
+finish, HASL lead free
 stencils, top
 pcs per panel, 4
 min trace width, 0.2032mm / 0.0080in
