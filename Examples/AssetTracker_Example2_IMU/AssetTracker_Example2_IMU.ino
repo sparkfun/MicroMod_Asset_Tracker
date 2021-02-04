@@ -22,6 +22,10 @@
   SparkFun SAMD51 MicroMod : Click here to get the boards: http://boardsmanager/All#Arduino_SAMD_Boards plus http://boardsmanager/All#SparkFun_SAMD_Boards
   SparkFun ESP32 MicroMod  : Click here to get the boards: http://boardsmanager/All#ESP32 (Please install the Espressif ESP32 boards _and_ the SparkFun ESP32 boards)
 
+  Special note for the ESP32:
+    If you are using the ESP32 Processor Board, you must open the G3/IMU_PWR and G4/RI split pads on the rear of the PCB
+    otherwise the PB will not be able to communicate with the SARA via serial.
+
   Feel like supporting open source hardware?
   Buy a board from SparkFun!
   SparkFun MicroMod Artemis Processor : http://www.sparkfun.com/products/16401
@@ -42,11 +46,6 @@
 ICM_20948_SPI myICM;  // Create an ICM_20948_SPI object
 
 #define SERIAL_PORT Serial // This is the console serial port - change this if required
-
-#include <SparkFun_u-blox_SARA-R5_Arduino_Library.h> //Click here to get the library: http://librarymanager/All#SparkFun_u-blox_SARA-R5_Arduino_Library
-
-// Create a SARA_R5 object to use throughout the sketch. Pass it the power pin number.
-SARA_R5 assetTracker(SARA_PWR);
 
 void setup()
 {
