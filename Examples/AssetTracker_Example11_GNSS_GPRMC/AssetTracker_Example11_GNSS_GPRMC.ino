@@ -82,23 +82,17 @@ void setup()
     SERIAL_PORT.println(F("Asset Tracker (SARA-R5) connected!"));
   }
 
-  // Enable the GPS's RMC sentence output. This will also turn the
-  // GPS module on ((assetTracker.gpsPower(true)) if it's not already
-  if (assetTracker.gpsEnableRmc(true) != SARA_R5_SUCCESS)
-  {
-    SERIAL_PORT.println(F("Error initializing GPS. Freezing..."));
-    while (1) ;
-  }
-
   // Enable power for the GNSS active antenna
   enableGNSSAntennaPower();
 
   // From the u-blox SARA-R5 Positioning Implementation Application Note UBX-20012413 - R01
   // To enable the PPS output we need to:
-  // Enable the timing information request with +UTIMEIND=1
-  // Reset the time offset configuration with +UTIMECFG=0,0
-  // Configure GPIO6 for TIME_PULSE_OUTPUT: .init does this
-  // Request PPS output using GNSS+LTE (Best effort) with +UTIME=1,1
+  //  Enable the timing information request with +UTIMEIND=1
+  //  Reset the time offset configuration with +UTIMECFG=0,0
+  //  Configure GPIO6 for TIME_PULSE_OUTPUT: .init does this
+  //  Request PPS output using GNSS+LTE (Best effort) with +UTIME=1,1
+  // The bit that doesn't seem to be mentioned in the documentation is that +UTIME=1,1 also
+  // enables the GPS module and so we don't need to call gpsPower or gpsEnableRmc
 
   // Enable the timing information request
   //assetTracker.setUtimeIndication(); // Use default (SARA_R5_UTIME_URC_CONFIGURATION_ENABLED)
@@ -126,6 +120,11 @@ void loop()
     {
       delay(1000); // If RMC read fails, wait a second and try again
     }
+  }
+
+  // Echo any incoming characters to the serial monitor
+  if (SARA_Serial.available()) {
+    SERIAL_PORT.write((char) SARA_Serial.read());
   }
 }
 
