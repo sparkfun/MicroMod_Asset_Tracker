@@ -77,9 +77,9 @@ void loop()
   // Toggle the GNSS antenna power.
   enableGNSSAntennaPower();
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(500);
+  delay(1000);
   
   disableGNSSAntennaPower();
   digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
+  delay(1000);
 }

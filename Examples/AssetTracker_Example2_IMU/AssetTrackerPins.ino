@@ -4,7 +4,7 @@
   ===================================================
 
   Written by: Paul Clark
-  Date: February 4th 2021
+  Date: February 5th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -116,18 +116,35 @@ float readVIN()
 {
   float vin = analogRead(VIN_DIV_3);
 #if defined(ARDUINO_ARDUINO_NANO33BLE)
-  vin *= 3.3 / 1023.0; // nRF52840 (Arduino NANO 33 BLE) is 3.3V and defaults to 10-bit
+  // nRF52840 (Arduino NANO 33 BLE) is 3.3V and defaults to 10-bit
+  // BUT the Schottky diode D2 on the 3.3V line reduces VDD to 3.05V
+  vin *= 3.05 / 1023.0;
+  vin *= 3.0; // Correct for resistor divider
 #elif defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD)
   vin *= 2.0 / 1023.0; // Artemis (APOLLO3) is 2.0V and defaults to 10-bit
   vin *= 2.5 / 1.5; // Artemis PB has a built-in 150k/100k divider
   vin *= 1.41; // Correction factor to compensate for the divider resistance
-#elif defined(ARDUINO_ARCH_ESP32)
-  vin *= 3.3 / 4095.0; // ESP32 is 3.3V and defaults to 12-bit
-#elif defined(ARDUINO_ARCH_SAMD)
-  vin *= 3.3 / 1023.0; // SAMD51 is 3.3V and defaults to 10-bit
-#else
-  vin *= 1.0; // Undefined PB!
-#endif
   vin *= 3.0; // Correct for resistor divider
+#elif defined(ARDUINO_ARCH_ESP32)
+  // ESP32 is 3.3V and defaults to 12-bit
+  // Manual measurements:
+  // VIN  ADC
+  // 3.5V 1150
+  // 4.0V 1350
+  // 4.5V 1535
+  // 5.0V 1735
+  // 5.5V 1930
+  // 6.0V 2130
+  // so, VIN = (ADC / 392) + 0.565
+  vin /= 392;
+  vin += 0.565;
+#elif defined(ARDUINO_ARCH_SAMD)
+  // SAMD51 is 3.3V and defaults to 10-bit
+  // BUT the Schottky diode D3 on the 3.3V line reduces VDD to 3.02V
+  vin *= 3.02 / 1023.0;
+  vin *= 3.0; // Correct for resistor divider
+#else
+  vin *= 3.0; // Undefined PB!
+#endif
   return (vin);
 }

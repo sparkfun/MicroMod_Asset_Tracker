@@ -17,7 +17,7 @@
   VCC      3.3V
   DO       SCK
   DI       COPI
-  DC       A0
+  DC       PWM0
   CS       D0
   RES      D1
 
@@ -60,7 +60,7 @@ SARA_R5 assetTracker(SARA_PWR);
 #include <String.h>
 #include <SFE_MicroOLED.h>  // Click here to get the library: http://librarymanager/All#SparkFun_Micro_OLED
 
-MicroOLED oled(D1, A0, D0); // PIN_RESET, PIN_DC, PIN_CS
+MicroOLED oled(D1, PWM0, D0); // PIN_RESET, PIN_DC, PIN_CS
 
 void setup()
 {
