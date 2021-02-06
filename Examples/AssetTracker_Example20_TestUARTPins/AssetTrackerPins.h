@@ -4,7 +4,7 @@
   =============================================
 
   Written by: Paul Clark
-  Date: October 30th 2020
+  Date: February 5th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -35,8 +35,8 @@
     If the user needs access to the digital microphone, the MICROSD_PWR_EN and SARA_PWR pins need to be isolated.
     The user can open the PDM_CLK and PDM_DAT split pads to isolate the microphone if required.
     Or can open the G1/SD_PWR and G2/LTE_PWR split pads to isolate the power enables. Both enables will then default to ON.
-  ESP32 PB connects G3->TX1->AUD_OUT and G4->RX1->AUD_IN and so the user _must_ isolate the ICM_PWR_EN and SARA_RI pins:
-    The user can open the G3/IMU_PWR and G4/RI to isolate these signals. The IMU power will default to ON.
+  ESP32 PB connects G3->TX1->AUD_OUT and G4->RX1->AUD_IN and so the ICM_PWR_EN and SARA_RI pins must be isolated:
+    The G3/IMU_PWR and G4/RI split pads are normally open. The IMU power will default to ON.
   ESP32 PB: G7, G9 and G10 are not connected. So SARA_DSR and SARA_ON are not supported.
 
 */
@@ -48,19 +48,18 @@
 #define AT_Wire Wire        // Wire (I2C) interface used by the Qwiic bus and the Battery Fuel Gauge
 
 // Only some of the PBs support a second UART
-#if defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD) //|| defined()
+#if defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32)
 #define SARA_2UART_MODE_NOT_SUPPORTED
 #endif
 
 // This is hopefully a temporary fix for the SAMD51 pins
 #if defined(ARDUINO_ARCH_SAMD)
-#define BATTVIN3 A4
+#define BATTVIN3 BATT_VIN
 #endif
 
 // This is hopefully a temporary fix for the ESP32 pins
 #if defined(ARDUINO_ARCH_ESP32)
 #define G7 -1
-#define G9 -1
 #define I2CINT I2C_INT
 #define CS SS
 #define BATTVIN3 BATT_VIN
@@ -90,20 +89,15 @@ const int SARA_PWR       = G2; // Output: Pull high then low to switch the SARA-
 const int IMU_PWR_EN     = G3; // Output: Pull high to enable power for the IMU. Pull low to disable.
 const int SARA_RI        = G4; // Input:  SARA-R5 Ring Indicator pin. Becomes CTS2 in 2-UART mode.
 const int SARA_INT       = G5; // Input:  SARA-R5 EXT_INT interrupt pin.
-const int ANT_PWR_EN     = G6; // Output: Pull high to enable power for the GNSS active antenna. Pull low to disable.
+const int SARA_ON        = G6; // Input:  Pulled low when the SARA-R5 is on. Pulled high when the SARA-R5 is off.
 const int SARA_DSR       = G7; // Input:  SARA-R5 DSR pin. Becomes RTS2 (Output) in 2-UART mode. (Change the split pad to change the direction of the 74AVC4T774)
-const int SARA_ON        = G9; // Input:  Pulled low when the SARA-R5 is on. Pulled high when the SARA-R5 is off.
 
-#if defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32)
-const int SARA_ON_ALT    = -1; // Not connected on the SAMD51
-#else
-const int SARA_ON_ALT    = G10; // Input: Alternate connection for the SARA_ON signal.
-#endif
-
+#if defined(ARDUINO_ARDUINO_NANO33BLE)
 const int SARA_RTS = PIN_SERIAL_RTS1; // Output: SARA-R5 RTS pin.
 const int SARA_CTS = PIN_SERIAL_CTS1; // Input:  SARA-R5 CTS pin.
 const int SARA_DTR = PIN_SERIAL_TX2; // Output: SARA-R5 DTR pin. Becomes TXD2 in 2-UART mode.
 const int SARA_DCD = PIN_SERIAL_RX2; // Input:  SARA-R5 DCD pin. Becomes RXD2 in 2-UART mode.
+#endif
 
 const int IMU_INT = I2CINT; // Input: IMU interrupt pin
 const int IMU_CS = CS; // Output: IMU SPI Chip Select

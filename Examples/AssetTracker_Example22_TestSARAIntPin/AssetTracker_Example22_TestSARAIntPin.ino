@@ -11,6 +11,8 @@
   This example tests the SARA I2C pins using AT+UTEST.
   The test is bi-directional; EXT_INT is tested both as an input and an output.
 
+  ** Note: you will need to manually solder the G5_SARA_INT split pad closed to connect the SARA_INT signal through to the processor pin **  
+
   The pins and ports are defined in AssetTrackerPins.ino.
 
   Please make sure that you have selected the correct Board using the Tools\Board menu:
@@ -22,10 +24,6 @@
   SparkFun Artemis MicroMod: Click here to get the boards: http://boardsmanager/All#SparkFun_Apollo3
   SparkFun SAMD51 MicroMod : Click here to get the boards: http://boardsmanager/All#Arduino_SAMD_Boards plus http://boardsmanager/All#SparkFun_SAMD_Boards
   SparkFun ESP32 MicroMod  : Click here to get the boards: http://boardsmanager/All#ESP32 (Please install the Espressif ESP32 boards _and_ the SparkFun ESP32 boards)
-
-  Special note for the ESP32:
-    If you are using the ESP32 Processor Board, you must open the G3/IMU_PWR and G4/RI split pads on the rear of the PCB
-    otherwise the PB will not be able to communicate with the SARA via serial.
 
   Feel like supporting open source hardware?
   Buy a board from SparkFun!

@@ -92,10 +92,12 @@ const int SARA_INT       = G5; // Input:  SARA-R5 EXT_INT interrupt pin.
 const int SARA_ON        = G6; // Input:  Pulled low when the SARA-R5 is on. Pulled high when the SARA-R5 is off.
 const int SARA_DSR       = G7; // Input:  SARA-R5 DSR pin. Becomes RTS2 (Output) in 2-UART mode. (Change the split pad to change the direction of the 74AVC4T774)
 
-//const int SARA_RTS = ; // Output: SARA-R5 RTS pin.
-//const int SARA_CTS = ; // Input:  SARA-R5 CTS pin.
-//const int SARA_DTR = ; // Output: SARA-R5 DTR pin. Becomes TXD2 in 2-UART mode.
-//const int SARA_DCD = ; // Input:  SARA-R5 DCD pin. Becomes RXD2 in 2-UART mode.
+#if defined(ARDUINO_ARDUINO_NANO33BLE)
+const int SARA_RTS = PIN_SERIAL_RTS1; // Output: SARA-R5 RTS pin.
+const int SARA_CTS = PIN_SERIAL_CTS1; // Input:  SARA-R5 CTS pin.
+const int SARA_DTR = PIN_SERIAL_TX2; // Output: SARA-R5 DTR pin. Becomes TXD2 in 2-UART mode.
+const int SARA_DCD = PIN_SERIAL_RX2; // Input:  SARA-R5 DCD pin. Becomes RXD2 in 2-UART mode.
+#endif
 
 const int IMU_INT = I2CINT; // Input: IMU interrupt pin
 const int IMU_CS = CS; // Output: IMU SPI Chip Select
