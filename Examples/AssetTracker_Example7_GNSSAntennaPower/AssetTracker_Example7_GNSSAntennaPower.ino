@@ -6,7 +6,7 @@
   GNSS Antenna Power
 
   Written by: Paul Clark
-  Date: October 30th 2020
+  Date: Novenber 20th 2020
 
   This example tests the GNSS Antenna Power regulator.
 
@@ -21,10 +21,6 @@
   SparkFun Artemis MicroMod: Click here to get the boards: http://boardsmanager/All#SparkFun_Apollo3
   SparkFun SAMD51 MicroMod : Click here to get the boards: http://boardsmanager/All#Arduino_SAMD_Boards plus http://boardsmanager/All#SparkFun_SAMD_Boards
   SparkFun ESP32 MicroMod  : Click here to get the boards: http://boardsmanager/All#ESP32 (Please install the Espressif ESP32 boards _and_ the SparkFun ESP32 boards)
-
-  Special note for the ESP32:
-    If you are using the ESP32 Processor Board, you must open the G3/IMU_PWR and G4/RI split pads on the rear of the PCB
-    otherwise the PB will not be able to communicate with the SARA via serial.
 
   Feel like supporting open source hardware?
   Buy a board from SparkFun!
@@ -43,6 +39,11 @@
 
 #define SERIAL_PORT Serial // This is the console serial port - change this if required
 
+#include <SparkFun_u-blox_SARA-R5_Arduino_Library.h> //Click here to get the library: http://librarymanager/All#SparkFun_u-blox_SARA-R5_Arduino_Library
+
+// Create a SARA_R5 object to use throughout the sketch. Pass it the power pin number.
+SARA_R5 assetTracker(SARA_PWR);
+
 void setup()
 {
   initializeAssetTrackerPins(); // Initialize the pins and ports (defined in AssetTrackerPins.ino)
@@ -60,14 +61,25 @@ void setup()
   while (!SERIAL_PORT.available()) // Wait for the user to press a key (send any serial character)
     ;
 
-  digitalWrite(LED_BUILTIN, HIGH);
+  //assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
+
+  assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
+
+  // Initialize the SARA using SARA_Serial and 9600 Baud
+  if (assetTracker.begin(SARA_Serial, 9600) )
+  {
+    SERIAL_PORT.println(F("Asset Tracker (SARA-R5) connected!"));
+  }
 }
 
 void loop()
 {
-  // Toggle the GNSS antenna power
-  disableGNSSAntennaPower();
-  delay(500);
+  // Toggle the GNSS antenna power.
   enableGNSSAntennaPower();
-  delay(500);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  
+  disableGNSSAntennaPower();
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);
 }

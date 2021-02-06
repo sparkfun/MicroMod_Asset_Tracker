@@ -9,8 +9,10 @@
   Date: November 20th 2020
 
   This example tests the UART pins (DSR/RI/DCD/DTR/RTS/CTS) using the AT+UTEST command.
-  Note: you will need to run this on a MicroMod processor board which supports all of the UART pins
-        E.g. the nRF52840 PB
+  
+  ** Note: this example currently only runs on the MicroMod nRF52840 Processor Board as it supports all of the UART pins **
+
+  ** Note: you will need to manually solder the G4_RI and G7_DSR split pads closed to connect the RI and DSR signals through to the nRF52840 pins **
 
   The pins and ports are defined in AssetTrackerPins.ino.
 
@@ -23,10 +25,6 @@
   SparkFun Artemis MicroMod: Click here to get the boards: http://boardsmanager/All#SparkFun_Apollo3
   SparkFun SAMD51 MicroMod : Click here to get the boards: http://boardsmanager/All#Arduino_SAMD_Boards plus http://boardsmanager/All#SparkFun_SAMD_Boards
   SparkFun ESP32 MicroMod  : Click here to get the boards: http://boardsmanager/All#ESP32 (Please install the Espressif ESP32 boards _and_ the SparkFun ESP32 boards)
-
-  Special note for the ESP32:
-    If you are using the ESP32 Processor Board, you must open the G3/IMU_PWR and G4/RI split pads on the rear of the PCB
-    otherwise the PB will not be able to communicate with the SARA via serial.
 
   Feel like supporting open source hardware?
   Buy a board from SparkFun!

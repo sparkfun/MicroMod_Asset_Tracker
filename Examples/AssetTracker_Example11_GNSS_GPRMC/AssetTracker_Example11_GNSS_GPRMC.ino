@@ -23,10 +23,6 @@
   SparkFun SAMD51 MicroMod : Click here to get the boards: http://boardsmanager/All#Arduino_SAMD_Boards plus http://boardsmanager/All#SparkFun_SAMD_Boards
   SparkFun ESP32 MicroMod  : Click here to get the boards: http://boardsmanager/All#ESP32 (Please install the Espressif ESP32 boards _and_ the SparkFun ESP32 boards)
 
-  Special note for the ESP32:
-    If you are using the ESP32 Processor Board, you must open the G3/IMU_PWR and G4/RI split pads on the rear of the PCB
-    otherwise the PB will not be able to communicate with the SARA via serial.
-
   Feel like supporting open source hardware?
   Buy a board from SparkFun!
   SparkFun MicroMod Artemis Processor : http://www.sparkfun.com/products/16401
@@ -75,7 +71,7 @@ void setup()
   while (!SERIAL_PORT.available()) // Wait for the user to press a key (send any serial character)
     ;
 
-  assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
+  //assetTracker.enableDebugging(SERIAL_PORT); // Uncomment this line to enable helpful debug messages
 
   assetTracker.invertPowerPin(true); // For the Asset Tracker, we need to invert the power pin so it pulls high instead of low
 
