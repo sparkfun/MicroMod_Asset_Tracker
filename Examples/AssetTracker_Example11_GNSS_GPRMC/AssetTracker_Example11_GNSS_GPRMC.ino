@@ -51,7 +51,7 @@ SpeedData spd;
 ClockData clk;
 boolean valid;
 
-#define GPS_POLL_RATE 5000 // Read GPS every 5 seconds
+#define GPS_POLL_RATE 1000 // Read GNSS every second
 unsigned long lastGpsPoll = 0;
 
 void setup()
@@ -87,21 +87,24 @@ void setup()
 
   // From the u-blox SARA-R5 Positioning Implementation Application Note UBX-20012413 - R01
   // To enable the PPS output we need to:
-  //  Enable the timing information request with +UTIMEIND=1
-  //  Reset the time offset configuration with +UTIMECFG=0,0
-  //  Configure GPIO6 for TIME_PULSE_OUTPUT: .init does this
-  //  Request PPS output using GNSS+LTE (Best effort) with +UTIME=1,1
-  // The bit that doesn't seem to be mentioned in the documentation is that +UTIME=1,1 also
-  // enables the GPS module and so we don't need to call gpsPower or gpsEnableRmc
+  // Configure GPIO6 for TIME_PULSE_OUTPUT - .init does this
+  // Enable the timing information request with +UTIMEIND=1 - setUtimeIndication()
+  // Reset the time offset configuration with +UTIMECFG=0,0 - setUtimeConfiguration()
+  // Request PPS output using GNSS+LTE (Best effort) with +UTIME=1,1 - setUtimeMode()
+  // The bits that don't seem to be mentioned in the documentation are:
+  //   +UTIME=1,1 also enables the GNSS module and so we don't need to call gpsPower.
+  //   +UTIME=1,1 only works when the GNSS module if off. It returns an ERROR if the GNSS is already on.
 
-  // Enable the timing information request
-  //assetTracker.setUtimeIndication(); // Use default (SARA_R5_UTIME_URC_CONFIGURATION_ENABLED)
+  // Enable the timing information request (URC)
+  //mySARA.setUtimeIndication(); // Use default (SARA_R5_UTIME_URC_CONFIGURATION_ENABLED)
   
   // Clear the time offset
   assetTracker.setUtimeConfiguration(); // Use default offset (offsetNanoseconds = 0, offsetSeconds = 0)
   
   // Set the UTIME mode to pulse-per-second output using a best effort from GNSS and LTE
   assetTracker.setUtimeMode(); // Use defaults (mode = SARA_R5_UTIME_MODE_PPS, sensor = SARA_R5_UTIME_SENSOR_GNSS_LTE)
+
+  assetTracker.gpsEnableRmc(); // Enable GPRMC messages
 }
 
 void loop()
