@@ -30,9 +30,6 @@ The SparkFun Asset Tracker Carrier Board also has a built-in micro-SD card socke
 -------------------
 * [DEV-17272](https://www.sparkfun.com/products/17272) - The MicroMod Asset Tracker Carrier Board uses the u-blox SARA-R5 LTE-M / NB-IoT module to provide a powerful development tool.
 
-## Version History
-* [v1.1](https://www.sparkfun.com/products/17272)
-
 ## License Information
 -------------------
 
