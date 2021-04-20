@@ -1,6 +1,6 @@
 # MicroMod Asset Tracker Carrier Board
 
-[![SparkFun MicroMod Asset Tracker Carrier Board](https://cdn.sparkfun.com/assets/parts/1/6/2/7/9/17272-SparkFun_MicroMod_Asset_Tracker_Carrier_Board-04.jpg)](https://www.sparkfun.com/products/17272)
+[![SparkFun MicroMod Asset Tracker Carrier Board](https://cdn.sparkfun.com/assets/parts/1/6/2/7/9/17272-SparkFun_MicroMod_Asset_Tracker_Carrier_Board-01a.jpg)](https://www.sparkfun.com/products/17272)
 
 [*SparkFun MicroMod Asset Tracker Carrier Board (DEV-17272)*](https://www.sparkfun.com/products/17272)
 
