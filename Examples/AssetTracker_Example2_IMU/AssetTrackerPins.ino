@@ -4,7 +4,7 @@
   ===================================================
 
   Written by: Paul Clark
-  Date: February 5th 2021
+  Date: October 6th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -142,6 +142,10 @@ float readVIN()
   // SAMD51 is 3.3V and defaults to 10-bit
   // BUT the Schottky diode D3 on the 3.3V line reduces VDD to 3.02V
   vin *= 3.02 / 1023.0;
+  vin *= 3.0; // Correct for resistor divider
+#elif defined(ARDUINO_ARCH_STM32)
+  // STM32 is 3.3V and defaults to 10-bit
+  vin *= 3.3 / 1023.0;
   vin *= 3.0; // Correct for resistor divider
 #else
   vin *= 3.0; // Undefined PB!
