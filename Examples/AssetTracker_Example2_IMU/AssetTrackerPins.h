@@ -4,7 +4,7 @@
   =============================================
 
   Written by: Paul Clark
-  Date: February 5th 2021
+  Date: October 6th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -39,6 +39,10 @@
     The G3/IMU_PWR and G4/RI split pads are normally open. The IMU power will default to ON.
   ESP32 PB: G7, G9 and G10 are not connected. So SARA_DSR and SARA_ON are not supported.
 
+  STM32 PB does not support RTS/CTS hardware handshaking. So we do not need to define those pins here.
+  STM32 PB does not support TX2 (SARA_DTR) or RX2 (SARA_DCD) and so cannot use the SARA's 2-UART mode.
+  STM32 PB: G7 is not connected. So SARA_ON is not supported.
+
 */
 
 // Ports
@@ -48,7 +52,7 @@
 #define AT_Wire Wire        // Wire (I2C) interface used by the Qwiic bus and the Battery Fuel Gauge
 
 // Only some of the PBs support a second UART
-#if defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32)
+#if defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_STM32)
 #define SARA_2UART_MODE_NOT_SUPPORTED
 #endif
 
@@ -69,6 +73,14 @@
 #if defined(ARDUINO_ARDUINO_NANO33BLE)
 #define I2CINT PIN_WIRE_INT
 #define CS SS
+#endif
+
+#if defined(ARDUINO_ARCH_STM32)
+#define G7 -1
+#define I2CINT INT
+#define CS PIN_SPI_SS
+#define BATTVIN3 2 // == A2 == PA_1
+HardwareSerial Serial1(RX1, TX1);
 #endif
 
 // Pins
