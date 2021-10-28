@@ -79,7 +79,7 @@
 #define G7 -1
 #define I2CINT INT
 #define CS PIN_SPI_SS
-#define BATTVIN3 BATT_VIN
+#define BATTVIN3 2 // == A2 == PA_1
 HardwareSerial Serial1(RX1, TX1);
 #endif
 
