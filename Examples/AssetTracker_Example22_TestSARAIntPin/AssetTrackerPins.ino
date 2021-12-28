@@ -4,7 +4,7 @@
   ===================================================
 
   Written by: Paul Clark
-  Date: October 6th 2021
+  Date: December 28th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -120,7 +120,7 @@ float readVIN()
   // BUT the Schottky diode D2 on the 3.3V line reduces VDD to 3.05V
   vin *= 3.05 / 1023.0;
   vin *= 3.0; // Correct for resistor divider
-#elif defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD)
+#elif defined(ARDUINO_APOLLO3_SFE_ARTEMIS_MM_PB)
   vin *= 2.0 / 1023.0; // Artemis (APOLLO3) is 2.0V and defaults to 10-bit
   vin *= 2.5 / 1.5; // Artemis PB has a built-in 150k/100k divider
   vin *= 1.41; // Correction factor to compensate for the divider resistance

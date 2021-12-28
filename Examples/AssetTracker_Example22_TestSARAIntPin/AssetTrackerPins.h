@@ -4,7 +4,7 @@
   =============================================
 
   Written by: Paul Clark
-  Date: October 6th 2021
+  Date: December 28th 2021
 
   The file defines the pins and ports for the MicroMod Asset Tracker.
 
@@ -54,6 +54,13 @@
 // Only some of the PBs support a second UART
 #if defined(ARDUINO_AM_AP3_SFE_ARTEMIS_MICROMOD) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_STM32)
 #define SARA_2UART_MODE_NOT_SUPPORTED
+#endif
+
+// Fix for v2 of Apollo3 (Artemis)
+#if defined(ARDUINO_APOLLO3_SFE_ARTEMIS_MM_PB)
+#define I2CINT I2C_INT
+#define CS SS
+#define BATTVIN3 BATT_VIN
 #endif
 
 // This is hopefully a temporary fix for the SAMD51 pins
