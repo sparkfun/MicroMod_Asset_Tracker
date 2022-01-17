@@ -113,16 +113,6 @@ bool getAssistNowOnlineData(String theFilename)
     return false;
   }
 
-  int fileSize;
-  if (assetTracker.getFileSize(theFilename, &fileSize) != SARA_R5_SUCCESS)
-  {
-    SERIAL_PORT.print(F("getAssistNowOnlineData: No file written?!"));
-    return false;    
-  }
-  
-  SERIAL_PORT.print(F("File size is: "));
-  SERIAL_PORT.println(fileSize);
-
   return true;
 }
 
@@ -177,6 +167,65 @@ void prettyPrintString(String theString) // Pretty-print a String in HEX and ASC
     {
       if ((theString[i + j] >= 0x20) && (theString[i + j] <= 0x7E))
         SERIAL_PORT.write(theString[i + j]);
+      else
+        SERIAL_PORT.print(F("."));
+    }
+
+    SERIAL_PORT.println();
+  }
+
+  SERIAL_PORT.println();
+}
+
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+void prettyPrintChars(char *theData, int theLength) // Pretty-print char data in HEX and ASCII format
+{
+  SERIAL_PORT.println();
+  SERIAL_PORT.print(F("String length is "));
+  SERIAL_PORT.print(theLength);
+  SERIAL_PORT.print(F(" (0x"));
+  SERIAL_PORT.print(theLength, HEX);
+  SERIAL_PORT.println(F(")"));
+  SERIAL_PORT.println();
+
+  for (int i = 0; i < theLength; i += 16)
+  {
+    if (i < 10000) SERIAL_PORT.print(F("0"));
+    if (i < 1000) SERIAL_PORT.print(F("0"));
+    if (i < 100) SERIAL_PORT.print(F("0"));
+    if (i < 10) SERIAL_PORT.print(F("0"));
+    SERIAL_PORT.print(i);
+
+    SERIAL_PORT.print(F(" 0x"));
+
+    if (i < 0x1000) SERIAL_PORT.print(F("0"));
+    if (i < 0x100) SERIAL_PORT.print(F("0"));
+    if (i < 0x10) SERIAL_PORT.print(F("0"));
+    SERIAL_PORT.print(i, HEX);
+
+    SERIAL_PORT.print(F(" "));
+
+    int j;
+    for (j = 0; ((i + j) < theLength) && (j < 16); j++)
+    {
+      if (theData[i + j] < 0x10) SERIAL_PORT.print(F("0"));
+      SERIAL_PORT.print(theData[i + j], HEX);
+      SERIAL_PORT.print(F(" "));
+    }
+
+    if (((i + j) == theLength) && (j < 16))
+    {
+      for (int k = 0; k < (16 - (theLength % 16)); k++)
+      {
+        SERIAL_PORT.print(F("   "));
+      }
+    }
+      
+    for (j = 0; ((i + j) < theLength) && (j < 16); j++)
+    {
+      if ((theData[i + j] >= 0x20) && (theData[i + j] <= 0x7E))
+        SERIAL_PORT.write(theData[i + j]);
       else
         SERIAL_PORT.print(F("."));
     }

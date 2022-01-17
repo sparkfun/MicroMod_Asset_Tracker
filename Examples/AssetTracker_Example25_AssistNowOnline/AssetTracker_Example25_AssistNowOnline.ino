@@ -144,7 +144,8 @@ void setup()
 
   Wire.begin(); //Start I2C
 
-  //myGNSS.enableDebugging(); // Uncomment this line to enable helpful debug messages on Serial
+  // Uncomment this line to enable the major debug messages on Serial - so you can see how much data is pushed to the module
+  //myGNSS.enableDebugging(Serial, true);
 
   if (myGNSS.begin() == false) //Connect to the Ublox module using Wire port
   {
@@ -172,16 +173,27 @@ void setup()
 
   // Read the AssistNow data from file and push it to the module
 
+  int fileSize;
+  if (assetTracker.getFileSize(theFilename, &fileSize) != SARA_R5_SUCCESS)
+  {
+    SERIAL_PORT.print(F("getFileSize failed! Freezing..."));
+    while (1)
+      ; // Do nothing more    
+  }
+  
+  SERIAL_PORT.print(F("AssistNow file size is: "));
+  SERIAL_PORT.println(fileSize);
+
   // Read the data from file
-  String theAssistData = "";
-  if (assetTracker.getFileContents(theFilename, &theAssistData) != SARA_R5_SUCCESS)
+  char theAssistData[fileSize]; 
+  if (assetTracker.getFileContents(theFilename, (char *)theAssistData) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("getFileContents failed! Freezing..."));
     while (1)
       ; // Do nothing more    
   }
 
-  //prettyPrintString(theAssistData); // Uncomment this line to see the whole file contents (including the HTTP header)
+  //prettyPrintChars(theAssistData, fileSize); // Uncomment this line to see the whole file contents (including the HTTP header)
   
   // Tell the module to return UBX_MGA_ACK_DATA0 messages when we push the AssistNow data
   myGNSS.setAckAiding(1);
@@ -197,7 +209,7 @@ void setup()
   // We have called setAckAiding(1) to instruct the module to return MGA-ACK messages.
   // So, set the pushAssistNowData mgaAck parameter to SFE_UBLOX_MGA_ASSIST_ACK_YES.
   // Wait for up to 100ms for each ACK to arrive! 100ms is a bit excessive... 7ms is nearer the mark.
-  myGNSS.pushAssistNowData(theAssistData, theAssistData.length(), SFE_UBLOX_MGA_ASSIST_ACK_YES, 100);
+  myGNSS.pushAssistNowData((const uint8_t *)theAssistData, fileSize, SFE_UBLOX_MGA_ASSIST_ACK_YES, 100);
 
   // Set setI2CpollingWait to 125ms to avoid pounding the I2C bus
   myGNSS.setI2CpollingWait(125);
