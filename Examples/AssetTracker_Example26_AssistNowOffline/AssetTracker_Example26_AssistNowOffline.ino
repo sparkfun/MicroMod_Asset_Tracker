@@ -209,6 +209,7 @@ void setup()
 
   // Read the AssistNow data from file
 
+  // Get the AssistNow data file size
   int fileSize;
   if (assetTracker.getFileSize(theFilename, &fileSize) != SARA_R5_SUCCESS)
   {
@@ -220,9 +221,11 @@ void setup()
   SERIAL_PORT.print(F("AssistNow file size is: "));
   SERIAL_PORT.println(fileSize);
 
+  // Allocate memory to store the file contents
+  char *theAssistData = new char[fileSize];  
+
   // Read the data from file
-  char theAssistData[fileSize]; 
-  if (assetTracker.getFileContents(theFilename, (char *)theAssistData) != SARA_R5_SUCCESS)
+  if (assetTracker.getFileContents(theFilename, theAssistData) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("getFileContents failed! Freezing..."));
     while (1)
@@ -324,6 +327,9 @@ void setup()
     // Set setI2CpollingWait to 125ms to avoid pounding the I2C bus
     myGNSS.setI2CpollingWait(125);
   }
+
+  // Free the memory allocated for theAssistData
+  delete[] theAssistData;
 
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
   

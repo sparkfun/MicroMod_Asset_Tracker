@@ -184,9 +184,11 @@ void setup()
   SERIAL_PORT.print(F("AssistNow file size is: "));
   SERIAL_PORT.println(fileSize);
 
+  // Allocate memory to store the file contents
+  char *theAssistData = new char[fileSize];
+
   // Read the data from file
-  char theAssistData[fileSize]; 
-  if (assetTracker.getFileContents(theFilename, (char *)theAssistData) != SARA_R5_SUCCESS)
+  if (assetTracker.getFileContents(theFilename, theAssistData) != SARA_R5_SUCCESS)
   {
     SERIAL_PORT.println(F("getFileContents failed! Freezing..."));
     while (1)
@@ -210,6 +212,9 @@ void setup()
   // So, set the pushAssistNowData mgaAck parameter to SFE_UBLOX_MGA_ASSIST_ACK_YES.
   // Wait for up to 100ms for each ACK to arrive! 100ms is a bit excessive... 7ms is nearer the mark.
   myGNSS.pushAssistNowData((const uint8_t *)theAssistData, fileSize, SFE_UBLOX_MGA_ASSIST_ACK_YES, 100);
+
+  // Free the memory allocated for theAssistData
+  delete[] theAssistData;
 
   // Set setI2CpollingWait to 125ms to avoid pounding the I2C bus
   myGNSS.setI2CpollingWait(125);

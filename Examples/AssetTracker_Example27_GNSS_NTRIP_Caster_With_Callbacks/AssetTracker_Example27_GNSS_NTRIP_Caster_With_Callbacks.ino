@@ -197,6 +197,10 @@ void setup()
 
   Wire.begin(); //Start I2C
 
+#if defined(ARDUINO_APOLLO3_SFE_ARTEMIS_MM_PB)
+  setArtemisI2cPullUps(0); // Disable the Artemis internal I2C Pull-Ups to help reduce bus errors
+#endif
+
   // Uncomment the next line to enable the 'major' GNSS debug messages on Serial so you can see what AssistNow data is being sent
   //myGNSS.enableDebugging(Serial, true);
 
