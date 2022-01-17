@@ -182,7 +182,7 @@ void setup()
 
   // Set a callback to process the socket data
   // This will push the RTCM data to the GNSS
-  assetTracker.setSocketReadCallback(&processSocketData);
+  assetTracker.setSocketReadCallbackPlus(&processSocketData);
   
   //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 

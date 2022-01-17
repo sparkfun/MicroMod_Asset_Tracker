@@ -1,18 +1,18 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // processSocketData is provided to the SARA-R5 library via a 
-// callback setter -- setSocketReadCallback. (See setup())
-void processSocketData(int socket, String theData)
+// callback setter -- setSocketReadCallbackPlus. (See setup())
+void processSocketData(int socket, const char *theData, int dataLength, IPAddress remoteAddress, int remotePort)
 {
   SERIAL_PORT.print(F("processSocketData: Data received on socket "));
   SERIAL_PORT.print(socket);
   SERIAL_PORT.print(F(". Length is "));
-  SERIAL_PORT.print(theData.length());
+  SERIAL_PORT.print(dataLength);
   
   if (connectionOpen)
   {
     SERIAL_PORT.println(F(". Pushing it to the GNSS..."));
-    myGNSS.pushRawData((uint8_t *)theData.c_str(), theData.length());
+    myGNSS.pushRawData((uint8_t *)theData, (size_t)dataLength);
 
     lastReceivedRTCM_ms = millis(); // Update lastReceivedRTCM_ms
   }
