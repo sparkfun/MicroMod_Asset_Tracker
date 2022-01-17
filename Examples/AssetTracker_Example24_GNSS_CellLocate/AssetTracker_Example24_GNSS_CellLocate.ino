@@ -77,16 +77,42 @@ void processGpsRead(ClockData clck, PositionData gps,
   Serial.println();
   Serial.println(F("GNSS Data Received"));
   Serial.println(F("=================="));
-  Serial.println("Date (MM/DD/YYYY): " + String(clck.date.month) + "/" + 
-    String(clck.date.day) + "/" + String(clck.date.year));
-  Serial.println("Time: " + String(clck.time.hour) + ":" + 
-    String(clck.time.minute) + ":" + String(clck.time.second) + "." + String(clck.time.ms));
-  Serial.println("Lat: " + String(gps.lat, 7));
-  Serial.println("Lon: " + String(gps.lon, 7));
-  Serial.println("Alt: " + String(gps.alt));
-  Serial.println("Uncertainty: " + String(uncertainty));
-  Serial.println("Speed: " + String(spd.speed));
-  Serial.println("Course Over Ground: " + String(spd.cog));
+  
+  Serial.print(F("Date (MM/DD/YYYY): "));
+  Serial.print(clck.date.month / 10);
+  Serial.print(clck.date.month % 10);
+  Serial.print(F("/"));
+  Serial.print(clck.date.day / 10);
+  Serial.print(clck.date.day % 10);
+  Serial.print(F("/"));
+  Serial.println(clck.date.year);
+  
+  Serial.print(F("Time: "));
+  Serial.print(clck.time.hour / 10);
+  Serial.print(clck.time.hour % 10);
+  Serial.print(F(":"));
+  Serial.print(clck.time.minute / 10);
+  Serial.print(clck.time.minute % 10);
+  Serial.print(F(":"));
+  Serial.print(clck.time.second / 10);
+  Serial.print(clck.time.second % 10);
+  Serial.print(F("."));
+  Serial.print(clck.time.ms / 100);
+  Serial.print((clck.time.ms % 100) / 10);
+  Serial.println(clck.time.ms % 10);
+  
+  Serial.print(F("Lat: "));
+  Serial.println(gps.lat, 7);
+  Serial.print(F("Lon: "));
+  Serial.println(gps.lon, 7);
+  Serial.print(F("Alt: "));
+  Serial.println(gps.alt);
+  Serial.print(F("Uncertainty: "));
+  Serial.println(uncertainty);
+  Serial.print(F("Speed: "));
+  Serial.println(spd.speed);
+  Serial.print(F("Course Over Ground: "));
+  Serial.println(spd.cog);
   Serial.println();
 
   requestingGPS = false;
