@@ -16,7 +16,7 @@
     * Push the RTCM data to an external u-blox GNSS module over I2C (not to the one built-in to the SARA-R510M8S)
     * NMEA GPGGA data is pushed to the Caster every 10 seconds
 
-  The PDP profile is read from NVM. Please make sure you have run examples 4 & 7 previously to set up the profile.
+  The PDP profile is read from NVM. Please make sure you have run examples 14 & 17 previously to set up the profile.
 
   Update secrets.h with your NTRIP Caster username and password
 
